@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  bastionlab:
+  - apiVersion: v2
+    appVersion: v0.3.4
+    created: "2022-12-12T10:55:41.65693437Z"
+    dependencies:
+    - name: library-chart
+      repository: https://inseefrlab.github.io/helm-charts-interactive-services
+      version: 1.0.3
+    description: BastionLab is a simple privacy framework for data science collaboration.
+    digest: 2e2c18d718614058b5c1679cfff9220bfacecc1f800468b7dd74d13d9a8f1e21
+    home: https://www.mithrilsecurity.io/
+    icon: https://minio.lab.sspcloud.fr/projet-onyxia/assets/servicesImg/bastionlab.png
+    keywords:
+    - Tool
+    - Data security
+    name: bastionlab
+    sources:
+    - https://hub.docker.com/r/mithrilsecuritysas/bastionlab
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/bastionlab-1.0.1/bastionlab-1.0.1.tgz
+    version: 1.0.1
+generated: "2022-12-12T10:55:41.65693867Z"
