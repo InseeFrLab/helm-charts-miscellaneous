@@ -22,4 +22,27 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/bastionlab-1.0.1/bastionlab-1.0.1.tgz
     version: 1.0.1
-generated: "2022-12-12T10:55:41.65693867Z"
+  delta-sharing-server:
+  - apiVersion: v2
+    appVersion: "1"
+    created: "2022-12-26T21:46:28.733895313Z"
+    dependencies:
+    - name: library-chart
+      repository: https://inseefrlab.github.io/helm-charts-interactive-services
+      version: 1.3.0
+    description: The Delta Sharing Reference Server is a reference implementation
+      server for the Delta Sharing Protocol. This can be used to set up a small service
+      to test your own connector that implements the Delta Sharing Protocol.
+    digest: 52c81b8173dafe71cbb88f61fb2805374eaf42e2cdcf463e1b2d46f1d85ef774
+    home: https://github.com/delta-io/delta-sharing
+    icon: https://user-images.githubusercontent.com/1000778/137567793-28ba7099-66fe-4d77-be50-bcee444a2017.png
+    keywords:
+    - SQL
+    name: delta-sharing-server
+    sources:
+    - https://github.com/delta-io/delta-sharing
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/delta-sharing-server-0.0.1/delta-sharing-server-0.0.1.tgz
+    version: 0.0.1
+generated: "2022-12-26T21:46:28.733902813Z"
