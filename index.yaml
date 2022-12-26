@@ -25,6 +25,28 @@ entries:
   delta-sharing-server:
   - apiVersion: v2
     appVersion: "1"
+    created: "2022-12-26T22:33:24.215320025Z"
+    dependencies:
+    - name: library-chart
+      repository: https://inseefrlab.github.io/helm-charts-interactive-services
+      version: 1.3.0
+    description: The Delta Sharing Reference Server is a reference implementation
+      server for the Delta Sharing Protocol. This can be used to set up a small service
+      to test your own connector that implements the Delta Sharing Protocol.
+    digest: 2fdfc16e6fb079607f8a511abee07ac23c8e0db84c232f3dfc8bdff4e5e40a1f
+    home: https://github.com/delta-io/delta-sharing
+    icon: https://user-images.githubusercontent.com/1000778/137567793-28ba7099-66fe-4d77-be50-bcee444a2017.png
+    keywords:
+    - SQL
+    name: delta-sharing-server
+    sources:
+    - https://github.com/delta-io/delta-sharing
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/delta-sharing-server-0.0.3/delta-sharing-server-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: "1"
     created: "2022-12-26T22:09:17.825388872Z"
     dependencies:
     - name: library-chart
@@ -67,4 +89,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/delta-sharing-server-0.0.1/delta-sharing-server-0.0.1.tgz
     version: 0.0.1
-generated: "2022-12-26T22:09:17.825402572Z"
+generated: "2022-12-26T22:33:24.215329225Z"
