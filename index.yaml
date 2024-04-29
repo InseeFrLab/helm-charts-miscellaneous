@@ -110,6 +110,21 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/delta-sharing-server-0.0.1/delta-sharing-server-0.0.1.tgz
     version: 0.0.1
+  lomas-server:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-04-29T08:19:44.664037868Z"
+    dependencies:
+    - name: lomas-server
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.0.2
+    description: FSO's Secure Data Disclosure deployment chart
+    digest: 9e4d6ab237a22eb217c417b83883b24d11a1c69a6a4c454c45f7f849b4b28c0b
+    name: lomas-server
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/lomas-server-0.0.2/lomas-server-0.0.2.tgz
+    version: 0.0.2
   onyxia-lomas-server:
   - apiVersion: v2
     appVersion: 0.0.0
@@ -125,4 +140,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/onyxia-lomas-server-0.1.0/onyxia-lomas-server-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-18T15:29:22.835155449Z"
+generated: "2024-04-29T08:19:44.664058096Z"
