@@ -113,6 +113,20 @@ entries:
   lomas-server:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2024-04-30T08:15:07.70698094Z"
+    dependencies:
+    - name: lomas-server
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.0.3
+    description: FSO's Secure Data Disclosure deployment chart
+    digest: 558c7c74acc1d2eb27575da0d78cb521df66ba9185837817015c512b969db34e
+    name: lomas-server
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/lomas-server-0.0.5/lomas-server-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2024-04-29T09:29:21.527990573Z"
     dependencies:
     - name: lomas-server
@@ -154,4 +168,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/onyxia-lomas-server-0.1.0/onyxia-lomas-server-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-29T09:29:21.528086702Z"
+generated: "2024-04-30T08:15:07.706997591Z"
