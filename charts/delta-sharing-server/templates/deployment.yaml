@@ -23,9 +23,9 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
-        - name: config-coresite
-          configMap:
-            name: {{ include "library-chart.configMapNameCoreSite" . }}
+        - name: secret-coresite
+          secret:
+            secretName: {{ include "library-chart.secretNameCoreSite" . }}
         - name: config-server
           configMap:
             name: {{ include "library-chart.fullname" . }}
@@ -47,7 +47,7 @@ spec:
           volumeMounts:
             - mountPath: /opt/docker/conf/core-site.xml
               subPath: core-site.xml
-              name: config-coresite
+              name: secret-coresite
             - mountPath: /opt/docker/conf/delta-sharing-server-config.yaml
               subPath: delta-sharing-server-config.yaml
               name: config-server
