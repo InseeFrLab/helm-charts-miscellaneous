@@ -726,22 +726,6 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/lomas-server-0.0.2/lomas-server-0.0.2.tgz
     version: 0.0.2
-  vLLM:
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2024-12-04T13:46:13.472977622Z"
-    dependencies:
-    - name: llm-serving
-      repository: https://dscc-admin-ch.github.io/helm-charts
-      version: 0.0.3
-    description: vLLM is a high-performance, low-latency, and memory-efficient library
-      designed for serving large language models (LLMs) at scale.
-    digest: bb0335a690bc490edb2137f47e718a94be87a7ff651b41e4e1a022df99961118
-    name: vLLM
-    type: application
-    urls:
-    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vLLM-0.0.1/vLLM-0.0.1.tgz
-    version: 0.0.1
   vllm:
   - apiVersion: v2
     appVersion: 0.0.2
