@@ -5,7 +5,7 @@ lomas-server:
   nameOverride: ""
   fullnameOverride: "lomas"
 
-  # MongoDB 
+  # MongoDB
   ##########################################################################
   mongodb:
     resources: {}
@@ -20,14 +20,14 @@ lomas-server:
       enabled: true
       rootUser: root
       rootPassword: root_pwd # changeme
-      usernames: [user] 
+      usernames: [user]
       passwords: [user_pwd] # changeme
       databases: [defaultdb]
     replicaCount: 1
     discoverable:
       allow: true
     security:
-      networkPolicy: 
+      networkPolicy:
         enabled: true
     persistence:
       # Set this to "keep" to disable data pvc deletion when uninstalling the chart.
@@ -40,7 +40,7 @@ lomas-server:
   # Dashboard Fast-API server
   ##########################################################################
 
-  server:  
+  server:
     image:
       repository: dsccadminch/lomas_server
       pullPolicy: Always
@@ -75,7 +75,7 @@ lomas-server:
     ingress:
       enabled: true
       className: "nginx"
-      annotations: 
+      annotations:
         nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
       hostname: "lomas-server.example.com"
     # Lomas server not meant to be replicated for now
@@ -134,11 +134,11 @@ lomas-server:
     service:
       type: ClusterIP
       port: 80
-  
+
     ingress:
       enabled: true
       className: "nginx"
-      annotations: 
+      annotations:
         nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
       hostname: "lomas-admin-dashboard.example.com"
     # Lomas dashboard not meant to be replicated for now
@@ -150,7 +150,7 @@ lomas-server:
     #  maxReplicas: 100
     #  targetCPUUtilizationPercentage: 80
     #  # targetMemoryUtilizationPercentage: 80
-    
+
     # We leave unset stuff here
     serviceAccount:
       create: false

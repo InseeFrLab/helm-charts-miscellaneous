@@ -13,7 +13,7 @@ bastionlab:
 replicaCount: 1
 
 security:
-  networkPolicy: 
+  networkPolicy:
     enabled: true
 
 persistence:
@@ -61,7 +61,7 @@ networking:
   type: ClusterIP
   service:
     port: 50056
-  
+
 
 
 resources: {}

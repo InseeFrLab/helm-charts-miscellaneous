@@ -47,7 +47,7 @@ shares:
       location: "s3a://bucket/tablepath"
 
 security:
-  networkPolicy: 
+  networkPolicy:
     enabled: false
     from: []
   allowlist:
@@ -59,7 +59,7 @@ security:
 networking:
   type: ClusterIP
   service:
-    port: 80
+    port: 8080
 
 ingress:
   enabled: true

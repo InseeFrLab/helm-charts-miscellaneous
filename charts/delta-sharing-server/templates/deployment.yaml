@@ -24,8 +24,8 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
         - name: config-coresite
-          configMap:
-            name: {{ include "library-chart.configMapNameCoreSite" . }}
+          secret:
+            secretName: {{ include "library-chart.secretNameCoreSite" . }}
         - name: config-server
           configMap:
             name: {{ include "library-chart.fullname" . }}
@@ -40,7 +40,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.service.image.repository }}:{{ .Values.service.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.service.image.pullPolicy }}
-          args: 
+          args:
             - -d
             - --config
             - /opt/docker/conf/delta-sharing-server-config.yaml

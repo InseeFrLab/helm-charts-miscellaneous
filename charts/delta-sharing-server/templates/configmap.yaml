@@ -19,13 +19,13 @@ data:
     {{- range .tables }}
     {{ printf "- %s: %s" "name" (.name | quote) | indent 4 }}
     {{ printf "%s: %s" "location" .location | indent 6 }}
-    {{- end }} 
-    {{- end }} 
-    {{- end }} 
-    
+    {{- end }}
+    {{- end }}
+    {{- end }}
+
     # Set the host name that the server will use
     host: {{ .Values.ingress.hostname | quote }}
-    # Set the port that the server will listen on. Note: using ports below 1024 
+    # Set the port that the server will listen on. Note: using ports below 1024
     # may require a privileged user in some operating systems.
     port: 8080
     # Set the url prefix for the REST APIs

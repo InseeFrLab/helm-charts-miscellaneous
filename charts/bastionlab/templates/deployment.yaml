@@ -82,8 +82,8 @@ spec:
               mkdir /home/users && \
               mkdir /home/privkeys && \
               python generate_keys.py {{ .Values.bastionlab.usersNumber }}
-              
-      {{- with .Values.nodeSelector }} 
+
+      {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}

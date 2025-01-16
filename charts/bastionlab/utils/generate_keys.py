@@ -1,5 +1,5 @@
 from keys import SigningKey
-import sys 
+import sys
 
 def main(args):
     users_number = int(args[0])
