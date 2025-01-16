@@ -3,6 +3,27 @@ entries:
   bastionlab:
   - apiVersion: v2
     appVersion: v0.3.6
+    created: "2025-01-16T13:13:33.00174332Z"
+    dependencies:
+    - name: library-chart
+      repository: https://inseefrlab.github.io/helm-charts-interactive-services
+      version: 1.5.41
+    description: BastionLab is a simple privacy framework for data science collaboration.
+    digest: 938836edae4e181c81b033c5df8dab2b7f1e51e0faa5d0e3ccf5a18d82aef3fa
+    home: https://www.mithrilsecurity.io/
+    icon: https://minio.lab.sspcloud.fr/projet-onyxia/assets/servicesImg/bastionlab.png
+    keywords:
+    - Tool
+    - Data security
+    name: bastionlab
+    sources:
+    - https://hub.docker.com/r/mithrilsecuritysas/bastionlab
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/bastionlab-1.0.3/bastionlab-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: v0.3.6
     created: "2023-01-13T16:10:16.793492606Z"
     dependencies:
     - name: library-chart
@@ -44,6 +65,28 @@ entries:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/bastionlab-1.0.1/bastionlab-1.0.1.tgz
     version: 1.0.1
   delta-sharing-server:
+  - apiVersion: v2
+    appVersion: "1"
+    created: "2025-01-16T13:13:33.107943521Z"
+    dependencies:
+    - name: library-chart
+      repository: https://inseefrlab.github.io/helm-charts-interactive-services
+      version: 1.5.41
+    description: The Delta Sharing Reference Server is a reference implementation
+      server for the Delta Sharing Protocol. This can be used to set up a small service
+      to test your own connector that implements the Delta Sharing Protocol.
+    digest: a89fe665b21052d9db7d6a16ba44bdf7c9cf0dfae08a06827cc4fc595f8b58ce
+    home: https://github.com/delta-io/delta-sharing
+    icon: https://user-images.githubusercontent.com/1000778/137567793-28ba7099-66fe-4d77-be50-bcee444a2017.png
+    keywords:
+    - SQL
+    name: delta-sharing-server
+    sources:
+    - https://github.com/delta-io/delta-sharing
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/delta-sharing-server-0.0.4/delta-sharing-server-0.0.4.tgz
+    version: 0.0.4
   - apiVersion: v2
     appVersion: "1"
     created: "2022-12-26T22:33:24.215320025Z"
@@ -111,6 +154,26 @@ entries:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/delta-sharing-server-0.0.1/delta-sharing-server-0.0.1.tgz
     version: 0.0.1
   lomas-server:
+  - apiVersion: v2
+    appVersion: 0.3.7
+    created: "2025-01-16T13:13:33.234056444Z"
+    dependencies:
+    - name: lomas-server
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.3.5
+    description: Lomas is a remote access platform developed by the Swiss Federal
+      Statistical Office allowing National Statistical Offices to offer eyes-off data
+      science on private datasets while controlling disclosure risk. The platform
+      relies on a service that is meant to be deployed on-premises and allows accredited
+      users to apply differentially private algorithms on private datasets using a
+      dedicated client Python library.
+    digest: 8c2d57913ca1238408e2bedbcb26e974dbf70d99c638aac3fb4ebe232d6e5657
+    icon: https://raw.githubusercontent.com/dscc-admin-ch/lomas/develop/images/lomas_logo.svg
+    name: lomas-server
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/lomas-server-0.3.8/lomas-server-0.3.8.tgz
+    version: 0.3.8
   - apiVersion: v2
     appVersion: 0.3.7
     created: "2024-10-31T08:03:22.764607148Z"
@@ -729,6 +792,22 @@ entries:
   vllm:
   - apiVersion: v2
     appVersion: 0.0.6
+    created: "2025-01-16T13:13:33.384943721Z"
+    dependencies:
+    - name: llm-serving
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.0.4
+    description: vLLM is a high-performance, low-latency, and memory-efficient library
+      designed for serving large language models (LLMs) at scale.
+    digest: 1264903c70b5b3aaee1e026fa053593c88d160e251c9e2b5e93fcb2c8d1353ec
+    icon: https://raw.githubusercontent.com/vllm-project/vllm/refs/heads/main/docs/source/assets/logos/vllm-logo-only-light.png
+    name: vllm
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vllm-0.0.7/vllm-0.0.7.tgz
+    version: 0.0.7
+  - apiVersion: v2
+    appVersion: 0.0.6
     created: "2025-01-08T08:29:16.5801071Z"
     dependencies:
     - name: llm-serving
@@ -791,4 +870,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vllm-0.0.2/vllm-0.0.2.tgz
     version: 0.0.2
-generated: "2025-01-08T08:29:16.580211064Z"
+generated: "2025-01-16T13:13:33.385313601Z"
