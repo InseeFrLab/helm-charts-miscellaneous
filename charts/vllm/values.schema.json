@@ -67,9 +67,9 @@
               "properties": {
                 "model": {
                   "type": "string",
-                  "default": "Phi-3-mini-4k-instruct",
+                  "default": "Phi-3.5-mini-instruct",
                   "enum": [
-                    "microsoft/Phi-3-mini-4k-instruct",
+                    "Phi-3.5-mini-instruct",
                     "Phi-3-mini-4k-instruct"
                   ],
                   "description": "Model to be served"
@@ -211,15 +211,10 @@
                 "overwriteDefaultWith": "{{s3.AWS_SESSION_TOKEN}}"
               }
             },
-            "bucket": {
-              "type": "string",
-              "description": "Name of the S3 bucket",
-              "default": "lmarti"
-            },
-            "modelPath": {
+            "modelHfBucket": {
               "type": "string",
               "description": "Path to the model within the S3 bucket",
-              "default": "diffusion/models/Phi-3-mini-4k-instruct"
+              "default": "models-hf/hf_hub/diffusion"
             }
           }
         }
