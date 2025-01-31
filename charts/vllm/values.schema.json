@@ -4,115 +4,108 @@
   "properties": {
     "llm-serving": {
       "type": "object",
+      "title": "VLLM configuration",
       "properties": {
-        "nameOverride": {
-          "type": "string",
-          "description": "Overrides the default name for the deployment",
-          "default": ""
-        },
-        "fullnameOverride": {
-          "type": "string",
-          "x-onyxia": {
-            "hidden": false,
-            "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-vllm"
+        "llm": {
+          "type": "object",
+          "form": true,
+          "title": "Large Language Model",
+          "properties": {
+            "hfNamespace": {
+              "type": "string",
+              "default": "microsoft",
+              "description": "Huggingface namespace of the model to be served"
+            },
+            "hfModel": {
+              "type": "string",
+              "default": "Phi-3.5-mini-instruct",
+              "description": "Model to be served"
+            },
+            "memoryutilization": {
+              "type": "number",
+              "description": "GPU memory utilization",
+              "default": 0.95
+            },
+            "dtype": {
+              "type": "string",
+              "description": "Data type for computation",
+              "default": "auto"
+            },
+            "maxModelLen": {
+              "type": "integer",
+              "description": "Maximum model length",
+              "default": 8200
+            }
           }
         },
-        "podAnnotations": {
-          "description": "Annotations to add to the pod",
+        "huggingFace": {
           "type": "object",
-          "additionalProperties": true,
-          "default": {}
+          "form": true,
+          "title": "HuggingFace 🤗",
+          "properties": {
+            "hftoken": {
+              "type": "string",
+              "render": "password",
+              "description": "Token for Hugging Face model access",
+              "title": "Token HuggingFace",
+              "default": ""
+            }
+          }
         },
-        "deployment": {
+        "service": {
+          "description": "Service specific configuration",
           "type": "object",
           "properties": {
             "image": {
-              "description": "Docker Image",
+              "description": "image docker",
               "type": "object",
               "properties": {
-                "repository": {
-                  "type": "string",
-                  "default": "vllm/vllm-openai",
-                  "enum": [
-                    "vllm/vllm-openai"
-                  ]
-                },
                 "pullPolicy": {
                   "type": "string",
                   "description": "option when pulling the docker image",
-                  "default": "Always",
+                  "default": "IfNotPresent",
                   "enum": [
                     "IfNotPresent",
                     "Always",
                     "Never"
                   ]
                 },
-                "tag": {
+                "version": {
+                  "description": "supported versions",
                   "type": "string",
-                  "default": "v0.6.4",
-                  "enum": [
-                    "latest",
-                    "v0.6.4"
-                  ]
-                }
-              }
-            },
-            "hftoken": {
-              "type": "string",
-              "description": "Token for Hugging Face model access",
-              "default": "your_token"
-            },
-            "args": {
-              "type": "object",
-              "properties": {
-                "model": {
-                  "type": "string",
-                  "default": "Phi-3.5-mini-instruct",
-                  "enum": [
-                    "Phi-3.5-mini-instruct",
-                    "Phi-3-mini-4k-instruct"
+                  "listEnum": [
+                    "vllm/vllm-openai:v0.7.0",
+                    "vllm/vllm-openai:v0.6.4",
+                    "vllm/vllm-openai:v0.6.0"
                   ],
-                  "description": "Model to be served"
+                  "render": "list",
+                  "pattern": "^[a-z0-9-_./]+(:[a-z0-9-_.]+)?$",
+                  "hidden": {
+                    "value": true,
+                    "path": "service/image/custom/enabled"
+                  },
+                  "default": "vllm/vllm-openai:v0.7.0"
                 },
-                "memoryutilization": {
-                  "type": "number",
-                  "description": "GPU memory utilization",
-                  "default": 0.8
-                },
-                "dtype": {
-                  "type": "string",
-                  "description": "Data type for computation",
-                  "default": "half"
-                },
-                "maxModelLen": {
-                  "type": "integer",
-                  "description": "Maximum model length",
-                  "default": 8208
-                }
-              }
-            },
-            "gpu": {
-              "type": "object",
-              "properties": {
-                "number": {
-                  "type": "integer",
-                  "description": "Number of GPUs to allocate",
-                  "default": 1
-                }
-              }
-            }
-          }
-        },
-        "service": {
-          "type": "object",
-          "properties": {
-            "port": {
-              "type": "object",
-              "properties": {
-                "number": {
-                  "type": "integer",
-                  "default": 8000,
-                  "description": "The port number the service listens on."
+                "custom": {
+                  "description": "use a custom docker image",
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "title": "custom image",
+                      "type": "boolean",
+                      "description": "use a custom vllm docker image",
+                      "default": false
+                    },
+                    "version": {
+                      "description": "unsupported version",
+                      "type": "string",
+                      "default": "vllm/vllm-openai:v0.7.0",
+                      "hidden": {
+                        "value": false,
+                        "path": "service/image/custom/enabled"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -120,31 +113,142 @@
         },
         "ingress": {
           "type": "object",
+          "form": true,
+          "title": "Ingress Details",
           "properties": {
-            "annotations": {
-              "type": "object",
-              "properties": {
-                "nginx.ingress.kubernetes.io/proxy-read-timeout": {
-                  "type": "string",
-                  "default": "3600"
-                }
-              }
-            },
             "enabled": {
+              "description": "Enable Ingress",
               "type": "boolean",
-              "description": "Enable ingress for the service",
-              "default": true
-            },
-            "className": {
-              "type": "string",
-              "default": "nginx"
+              "default": true,
+              "x-onyxia": {
+                "hidden": true,
+                "overwriteDefaultWith": "k8s.ingress"
+              }
             },
             "hostname": {
               "type": "string",
+              "form": true,
               "title": "Hostname",
               "x-onyxia": {
                 "hidden": false,
-                "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-vllm-{{k8s.domain}}"
+                "overwriteDefaultWith": "{{project.id}}-vllm.{{k8s.domain}}"
+              }
+            },
+            "className": {
+              "type": "string",
+              "form": true,
+              "title": "ingressClassName",
+              "default": "",
+              "x-onyxia": {
+                "hidden": true,
+                "overwriteDefaultWith": "{{k8s.ingressClassName}}"
+              }
+            }
+          }
+        },
+        "resources": {
+          "description": "Your service will have at least the requested resources and never more than its limits. No limit for a resource and you can consume everything left on the host machine.",
+          "type": "object",
+          "x-onyxia": {
+            "overwriteSchemaWith": "ide/resources-gpu.json"
+          },
+          "properties": {
+            "requests": {
+              "description": "Guaranteed resources",
+              "type": "object",
+              "properties": {
+                "cpu": {
+                  "description": "The amount of cpu guaranteed",
+                  "title": "CPU",
+                  "type": "string",
+                  "default": "100m",
+                  "render": "slider",
+                  "sliderMin": 50,
+                  "sliderMax": 40000,
+                  "sliderStep": 50,
+                  "sliderUnit": "m",
+                  "sliderExtremity": "down",
+                  "sliderExtremitySemantic": "guaranteed",
+                  "sliderRangeId": "cpu",
+                  "x-onyxia": {
+                    "overwriteDefaultWith": "region.resources.cpuRequest",
+                    "useRegionSliderConfig": "cpu"
+                  }
+                },
+                "memory": {
+                  "description": "The amount of memory guaranteed",
+                  "title": "memory",
+                  "type": "string",
+                  "default": "2Gi",
+                  "render": "slider",
+                  "sliderMin": 1,
+                  "sliderMax": 200,
+                  "sliderStep": 1,
+                  "sliderUnit": "Gi",
+                  "sliderExtremity": "down",
+                  "sliderExtremitySemantic": "guaranteed",
+                  "sliderRangeId": "memory",
+                  "x-onyxia": {
+                    "overwriteDefaultWith": "region.resources.memoryRequest",
+                    "useRegionSliderConfig": "memory"
+                  }
+                }
+              }
+            },
+            "limits": {
+              "description": "max resources",
+              "type": "object",
+              "properties": {
+                "cpu": {
+                  "description": "The maximum amount of cpu",
+                  "title": "CPU",
+                  "type": "string",
+                  "default": "30000m",
+                  "render": "slider",
+                  "sliderMin": 50,
+                  "sliderMax": 40000,
+                  "sliderStep": 50,
+                  "sliderUnit": "m",
+                  "sliderExtremity": "up",
+                  "sliderExtremitySemantic": "Maximum",
+                  "sliderRangeId": "cpu",
+                  "x-onyxia": {
+                    "overwriteDefaultWith": "region.resources.cpuLimit",
+                    "useRegionSliderConfig": "cpu"
+                  }
+                },
+                "memory": {
+                  "description": "The maximum amount of memory",
+                  "title": "Memory",
+                  "type": "string",
+                  "default": "50Gi",
+                  "render": "slider",
+                  "sliderMin": 1,
+                  "sliderMax": 200,
+                  "sliderStep": 1,
+                  "sliderUnit": "Gi",
+                  "sliderExtremity": "up",
+                  "sliderExtremitySemantic": "Maximum",
+                  "sliderRangeId": "memory",
+                  "x-onyxia": {
+                    "overwriteDefaultWith": "region.resources.memoryLimit",
+                    "useRegionSliderConfig": "memory"
+                  }
+                },
+                "nvidia.com/gpu": {
+                  "description": "GPU to allocate to this instance. This is also requested",
+                  "type": "string",
+                  "default": "1",
+                  "render": "slider",
+                  "sliderMin": 1,
+                  "sliderMax": 3,
+                  "sliderStep": 1,
+                  "sliderUnit": "",
+                  "x-onyxia": {
+                    "overwriteDefaultWith": "region.resources.gpu",
+                    "useRegionSliderConfig": "gpu"
+                  }
+                }
               }
             }
           }
@@ -209,16 +313,37 @@
               "render": "password",
               "x-onyxia": {
                 "overwriteDefaultWith": "{{s3.AWS_SESSION_TOKEN}}"
+              },
+              "hidden": {
+                "value": false,
+                "path": "s3/enabled"
               }
             },
-            "modelHfBucket": {
-              "type": "string",
+            "s3ModelPath": {
               "description": "Path to the model within the S3 bucket",
-              "default": "models-hf/hf_hub/diffusion"
+              "title": "Model Path",
+              "type": "string",
+              "default": "projet-models-hf/diffusion/hf_hub"
             }
           }
+        },
+        "nodeSelector": {
+          "type": "object",
+          "description": "NodeSelector",
+          "default": {},
+          "x-onyxia": {
+            "overwriteDefaultWith": "region.nodeSelector",
+            "overwriteSchemaWith": "nodeSelector-gpu.json"
+          }
+        },
+        "fullnameOverride": {
+          "type": "string",
+          "x-onyxia": {
+            "hidden": true,
+            "overwriteDefaultWith": "{{project.id}}-vllm"
+          }
         }
-      }
+    }
     }
   }
 }
