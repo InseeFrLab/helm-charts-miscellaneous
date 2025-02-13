@@ -42,11 +42,12 @@
                                 },
                                 "tag": {
                                     "type": "string",
-                                    "default": "0.3.5",
+                                    "default": "0.4.0",
                                     "enum": [
                                         "latest",
                                         "0.3.1",
-                                        "0.3.5"
+                                        "0.3.5",
+                                        "0.4.0"
                                     ]
                                 }
                             }
@@ -473,11 +474,12 @@
                                 },
                                 "tag": {
                                     "type": "string",
-                                    "default": "0.3.5",
+                                    "default": "0.4.0",
                                     "enum": [
                                         "latest",
                                         "0.3.1",
-                                        "0.3.5"
+                                        "0.3.5",
+                                        "0.4.0"
                                     ]
                                 }
                             }
@@ -805,6 +807,587 @@
                                 },
                                 "name": {
                                     "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "loki": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "port": {
+                                    "type": "integer",
+                                    "default": 3100
+                                },
+                                "target_port": {
+                                    "type": "integer",
+                                    "default": 3100
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "default": "ClusterIP"
+                                }
+                            }
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "lomas-loki"
+                        },
+                        "config": {
+                            "type": "object",
+                            "properties": {
+                                "auth_enabled": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "limits_config": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allow_structured_metadata": {
+                                            "type": "boolean",
+                                            "default": true
+                                        },
+                                        "volume_enabled": {
+                                            "type": "boolean",
+                                            "default": true
+                                        }
+                                    }
+                                },
+                                "server": {
+                                    "type": "object",
+                                    "properties": {
+                                        "http_listen_port": {
+                                            "type": "integer",
+                                            "default": 3100
+                                        }
+                                    }
+                                },
+                                "common": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ring": {
+                                            "type": "object",
+                                            "properties": {
+                                                "instance_addr": {
+                                                    "type": "string",
+                                                    "default": "0.0.0.0"
+                                                },
+                                                "kvstore": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "store": {
+                                                            "type": "string",
+                                                            "default": "inmemory"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "replication_factor": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "path_prefix": {
+                                            "type": "string",
+                                            "default": "/tmp/loki"
+                                        }
+                                    }
+                                },
+                                "schema_config": {
+                                    "type": "object",
+                                    "properties": {
+                                        "configs": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "from": {
+                                                        "type": "string",
+                                                        "default": "2025-01-10"
+                                                    },
+                                                    "store": {
+                                                        "type": "string",
+                                                        "default": "tsdb"
+                                                    },
+                                                    "object_store": {
+                                                        "type": "string",
+                                                        "default": "filesystem"
+                                                    },
+                                                    "schema": {
+                                                        "type": "string",
+                                                        "default": "v13"
+                                                    },
+                                                    "index": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "prefix": {
+                                                                "type": "string",
+                                                                "default": "loki_index_"
+                                                            },
+                                                            "period": {
+                                                                "type": "string",
+                                                                "default": "24h"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "storage_config": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tsdb_shipper": {
+                                            "type": "object",
+                                            "properties": {
+                                                "active_index_directory": {
+                                                    "type": "string",
+                                                    "default": "/tmp/loki/index"
+                                                },
+                                                "cache_location": {
+                                                    "type": "string",
+                                                    "default": "/tmp/loki/index_cache"
+                                                }
+                                            }
+                                        },
+                                        "filesystem": {
+                                            "type": "object",
+                                            "properties": {
+                                                "directory": {
+                                                    "type": "string",
+                                                    "default": "/tmp/loki/chunks"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "pattern_ingester": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean",
+                                            "default": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "prometheus": {
+                    "prometheus": {
+                        "type": "object",
+                        "properties": {
+                            "create": {
+                                "type": "boolean",
+                                "description": "Determines if Prometheus should be created.",
+                                "default": true
+                            },
+                            "service": {
+                                "type": "object",
+                                "properties": {
+                                    "port": {
+                                        "type": "integer",
+                                        "description": "Port on which the Prometheus service is exposed.",
+                                        "default": 9091
+                                    },
+                                    "target_port": {
+                                        "type": "integer",
+                                        "description": "Target port for the Prometheus service.",
+                                        "default": 9091
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "Type of Kubernetes service.",
+                                        "default": "ClusterIP"
+                                    }
+                                }
+                            },
+                            "fullnameOverride": {
+                                "type": "string",
+                                "description": "Override the full name for Prometheus deployment.",
+                                "default": "lomas-prometheus"
+                            },
+                            "config": {
+                            "type": "object",
+                                "properties": {
+                                    "scrape_interval": {
+                                        "type": "string",
+                                        "description": "Global scrape interval for Prometheus.",
+                                        "default": "5s"
+                                    },
+                                    "evaluation_interval": {
+                                        "type": "string",
+                                        "description": "Global evaluation interval for Prometheus.",
+                                        "default": "5s"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "otel": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "default": "ClusterIP"
+                                }
+                            }
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "lomas-otel"
+                        },
+                        "config": {
+                            "type": "object",
+                            "properties": {
+                                "receiver": {
+                                    "type": "object",
+                                    "properties": {
+                                        "grpc_port": {
+                                            "type": "integer",
+                                            "default": 4317
+                                        },
+                                        "http_port": {
+                                            "type": "integer",
+                                            "default": 4318
+                                        }
+                                    }
+                                },
+                                "processors": {
+                                    "type": "object",
+                                    "properties": {
+                                        "batch": {
+                                            "type": "object",
+                                            "properties": {
+                                                "timeout": {
+                                                    "type": "string",
+                                                    "default": "5s"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "exporters": {
+                                    "type": "object",
+                                    "properties": {
+                                        "prometheus": {
+                                            "type": "object",
+                                            "properties": {
+                                                "port": {
+                                                    "type": "integer",
+                                                    "default": 8889
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "extension": {
+                                    "type": "object",
+                                    "properties": {
+                                        "health_check_port": {
+                                            "type": "integer",
+                                            "default": 13133
+                                        },
+                                        "pprof_port": {
+                                            "type": "integer",
+                                            "default": 1777
+                                        },
+                                        "zpages_port": {
+                                            "type": "integer",
+                                            "default": 55679
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tempo": {
+                    "type": "object",
+                    "properties": {
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": ["ClusterIP", "NodePort", "LoadBalancer"],
+                                    "default": "ClusterIP"
+                                }
+                            }
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "lomas-tempo"
+                        },
+                        "server": {
+                            "type": "object",
+                            "properties": {
+                                "http_listen_port": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 65535,
+                                    "default": 3100
+                                }
+                            }
+                        },
+                        "ingester": {
+                            "type": "object",
+                            "properties": {
+                                "max_block_duration": {
+                                "type": "string",
+                                "pattern": "^\\d+m$",
+                                "default": "5m"
+                                }
+                            }
+                        },
+                        "storage": {
+                            "type": "object",
+                            "properties": {
+                                "trace": {
+                                    "type": "object",
+                                    "properties": {
+                                        "backend": {
+                                            "type": "string",
+                                            "enum": ["local", "s3", "gcs", "azure"],
+                                            "default": "local"
+                                        },
+                                        "local": {
+                                            "type": "object",
+                                            "properties": {
+                                                "path": {
+                                                    "type": "string",
+                                                    "default": "/var/tempo/traces"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "wal": {
+                                    "type": "object",
+                                    "properties": {
+                                        "path": {
+                                            "type": "string",
+                                            "default": "/var/tempo/wal"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "receivers": {
+                            "type": "object",
+                            "properties": {
+                                "otlp": {
+                                    "type": "object",
+                                    "properties": {
+                                        "protocols": {
+                                            "type": "object",
+                                            "properties": {
+                                                "grpc": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "endpoint": {
+                                                            "type": "string",
+                                                            "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+$",
+                                                            "default": "0.0.0.0:4317"
+                                                        }
+                                                    }
+                                                },
+                                                "http": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "endpoint": {
+                                                            "type": "string",
+                                                            "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+$",
+                                                            "default": "0.0.0.0:4318"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "overrides": {
+                            "type": "object",
+                            "properties": {
+                                "metrics_generator_processors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "default": [
+                                        "service-graphs",
+                                        "span-metrics"
+                                    ]
+                                }
+                            }
+                        },
+                        "persistence": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        }
+                    }
+                },
+                "grafana": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "default": "ClusterIP"
+                                },
+                                "port": {
+                                    "type": "integer",
+                                    "default": 3000
+                                }
+                            }
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "lomas-grafana-dashboard"
+                        },
+                        "rbac": {
+                            "type": "object",
+                            "properties": {
+                                "create": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "namespaced": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            }
+                        },
+                        "datasources": {
+                            "type": "object",
+                            "properties": {
+                                "datasources.yaml": {
+                                    "type": "object",
+                                    "properties": {
+                                        "apiVersion": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "datasources": {
+                                            "type": "array",
+                                            "default": [{
+                                                "name": "Prometheus",
+                                                "type": "prometheus",
+                                                "uid": "prometheus",
+                                                "access": "proxy",
+                                                "orgId": 1,
+                                                "url": "http://lomas-prometheus:9091",
+                                                "basicAuth": false,
+                                                "isDefault": false,
+                                                "version": 1,
+                                                "editable": true,
+                                                "jsonData": {
+                                                    "httpMethod": "GET"
+                                                }
+                                            }, {
+                                                "name": "Tempo",
+                                                "type": "tempo",
+                                                "uid": "tempo",
+                                                "access": "proxy",
+                                                "orgId": 1,
+                                                "url": "http://lomas-tempo:3100",
+                                                "basicAuth": false,
+                                                "isDefault": true,
+                                                "version": 1,
+                                                "editable": true,
+                                                "apiVersion": 1,
+                                                "stream_over_http_enabled": false
+                                            }, {
+                                                "name": "Loki",
+                                                "type": "loki",
+                                                "uid": "loki",
+                                                "access": "proxy",
+                                                "orgId": 1,
+                                                "url": "http://lomas-loki:3100",
+                                                "basicAuth": false,
+                                                "isDefault": false,
+                                                "version": 1,
+                                                "editable": true,
+                                                "jsonData": {
+                                                    "httpHeaderName1": "X-Scope-OrgID"
+                                                },
+                                                "secureJsonData": {
+                                                    "httpHeaderValue1": "tenant1"
+                                                }
+                                            }]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "env": {
+                            "type": "object",
+                            "properties": {
+                                "GF_SECURITY_ADMIN_USER": {
+                                    "type": "string",
+                                    "default": "admin"
+                                },
+                                "GF_SECURITY_ADMIN_PASSWORD": {
+                                    "type": "string",
+                                    "default": "admin"
+                                }
+                            }
+                        },
+                        "ingress": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "hosts": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "x-onyxia": {
+                                            "hidden": false,
+                                            "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "persistence": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": false
                                 }
                             }
                         }
