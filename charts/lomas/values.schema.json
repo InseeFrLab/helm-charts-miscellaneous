@@ -838,7 +838,10 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
-                            "default": "lomas-loki"
+                            "x-onyxia": {
+                                "hidden": false,
+                                "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-loki"
+                            }
                         },
                         "config": {
                             "type": "object",
@@ -1014,7 +1017,10 @@
                             "fullnameOverride": {
                                 "type": "string",
                                 "description": "Override the full name for Prometheus deployment.",
-                                "default": "lomas-prometheus"
+                                "x-onyxia": {
+                                    "hidden": false,
+                                    "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus"
+                                }
                             },
                             "config": {
                             "type": "object",
@@ -1052,7 +1058,10 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
-                            "default": "lomas-otel"
+                            "x-onyxia": {
+                                "hidden": false,
+                                "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-otel"
+                            }
                         },
                         "config": {
                             "type": "object",
@@ -1134,7 +1143,10 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
-                            "default": "lomas-tempo"
+                            "x-onyxia": {
+                                "hidden": false,
+                                "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo"
+                            }
                         },
                         "server": {
                             "type": "object",
@@ -1273,7 +1285,10 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
-                            "default": "lomas-grafana-dashboard"
+                            "x-onyxia": {
+                                "hidden": false,
+                                "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-grafana-dashboard"
+                            }
                         },
                         "rbac": {
                             "type": "object",
@@ -1306,7 +1321,7 @@
                                                 "uid": "prometheus",
                                                 "access": "proxy",
                                                 "orgId": 1,
-                                                "url": "http://lomas-prometheus:9091",
+                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus:9091",
                                                 "basicAuth": false,
                                                 "isDefault": false,
                                                 "version": 1,
@@ -1320,7 +1335,7 @@
                                                 "uid": "tempo",
                                                 "access": "proxy",
                                                 "orgId": 1,
-                                                "url": "http://lomas-tempo:3100",
+                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo:3100",
                                                 "basicAuth": false,
                                                 "isDefault": true,
                                                 "version": 1,
@@ -1333,7 +1348,7 @@
                                                 "uid": "loki",
                                                 "access": "proxy",
                                                 "orgId": 1,
-                                                "url": "http://lomas-loki:3100",
+                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-loki:3100",
                                                 "basicAuth": false,
                                                 "isDefault": false,
                                                 "version": 1,
@@ -1355,11 +1370,17 @@
                             "properties": {
                                 "GF_SECURITY_ADMIN_USER": {
                                     "type": "string",
-                                    "default": "admin"
+                                    "default": "changeme",
+                                    "x-onyxia": {
+                                        "overwriteDefaultWith": "{{project.password}}"
+                                    }
                                 },
                                 "GF_SECURITY_ADMIN_PASSWORD": {
                                     "type": "string",
-                                    "default": "admin"
+                                    "default": "changeme",
+                                    "x-onyxia": {
+                                        "overwriteDefaultWith": "{{project.password}}"
+                                    }
                                 }
                             }
                         },
