@@ -1370,14 +1370,11 @@
                             "properties": {
                                 "GF_SECURITY_ADMIN_USER": {
                                     "type": "string",
-                                    "default": "changeme",
-                                    "x-onyxia": {
-                                        "overwriteDefaultWith": "{{project.password}}"
-                                    }
+                                    "default": "admin"
                                 },
                                 "GF_SECURITY_ADMIN_PASSWORD": {
                                     "type": "string",
-                                    "default": "changeme",
+                                    "default": "admin",
                                     "x-onyxia": {
                                         "overwriteDefaultWith": "{{project.password}}"
                                     }
