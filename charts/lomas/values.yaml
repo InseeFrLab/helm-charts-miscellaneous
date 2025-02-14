@@ -308,7 +308,6 @@ lomas-server:
             uid: prometheus
             access: proxy
             orgId: 1
-            port: "9091"
             url: http://lomas-prometheus:9091
             basicAuth: false
             isDefault: false
@@ -321,7 +320,6 @@ lomas-server:
             uid: tempo
             access: proxy
             orgId: 1
-            port: "3100"
             url: http://lomas-tempo:3100
             basicAuth: false
             isDefault: true
@@ -334,7 +332,6 @@ lomas-server:
             uid: loki
             access: proxy
             orgId: 1
-            port: "3100"
             url: http://lomas-loki:3100
             basicAuth: false
             isDefault: false

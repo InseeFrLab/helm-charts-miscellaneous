@@ -1335,11 +1335,7 @@
                                                         "type": "string"
                                                     },
                                                     "url": {
-                                                        "type": "string",
-                                                        "default": "http://lomas-{{uid}}:{{port}}",
-                                                        "x-onyxia": {
-                                                            "overwriteDefaultWith": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-{{uid}}:{{port}}"
-                                                        }
+                                                        "type": "string"
                                                     },
                                                     "basicAuth": {
                                                         "type": "boolean",
