@@ -37,9 +37,8 @@ lomas-server:
       resourcePolicy: ""
 
 
-  # Dashboard Fast-API server
+  # Fast-API server
   ##########################################################################
-
   server:
     image:
       repository: dsccadminch/lomas_server
@@ -116,7 +115,6 @@ lomas-server:
 
   # Lomas Administration Dashboard
   ##########################################################################
-
   dashboard:
     create: true
 
