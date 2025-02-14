@@ -1313,48 +1313,51 @@
                                         },
                                         "datasources": {
                                             "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "name": {
-                                                        "type": "string"
-                                                    },
-                                                    "type": {
-                                                        "type": "string"
-                                                    },
-                                                    "uid": {
-                                                        "type": "string"
-                                                    },
-                                                    "access": {
-                                                        "type": "string"
-                                                    },
-                                                    "orgId": {
-                                                        "type": "integer"
-                                                    },
-                                                    "port": {
-                                                        "type": "string"
-                                                    },
-                                                    "url": {
-                                                        "type": "string"
-                                                    },
-                                                    "basicAuth": {
-                                                        "type": "boolean",
-                                                        "default": false
-                                                    },
-                                                    "isDefault": {
-                                                        "type": "boolean",
-                                                        "default": false
-                                                    },
-                                                    "version": {
-                                                        "type": "integer",
-                                                        "default": 1
-                                                    },
-                                                    "editable": {
-                                                        "type": "boolean",
-                                                        "default": true
-                                                    }
+                                            "default": [{
+                                                "name": "Prometheus",
+                                                "type": "prometheus",
+                                                "uid": "prometheus",
+                                                "access": "proxy",
+                                                "orgId": 1,
+                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus:9091",
+                                                "basicAuth": false,
+                                                "isDefault": false,
+                                                "version": 1,
+                                                "editable": true,
+                                                "jsonData": {
+                                                    "httpMethod": "GET"
                                                 }
-                                            }
+                                            }, {
+                                                "name": "Tempo",
+                                                "type": "tempo",
+                                                "uid": "tempo",
+                                                "access": "proxy",
+                                                "orgId": 1,
+                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo:3100",
+                                                "basicAuth": false,
+                                                "isDefault": true,
+                                                "version": 1,
+                                                "editable": true,
+                                                "apiVersion": 1,
+                                                "stream_over_http_enabled": false
+                                            }, {
+                                                "name": "Loki",
+                                                "type": "loki",
+                                                "uid": "loki",
+                                                "access": "proxy",
+                                                "orgId": 1,
+                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-loki:3100",
+                                                "basicAuth": false,
+                                                "isDefault": false,
+                                                "version": 1,
+                                                "editable": true,
+                                                "jsonData": {
+                                                    "httpHeaderName1": "X-Scope-OrgID"
+                                                },
+                                                "secureJsonData": {
+                                                    "httpHeaderValue1": "tenant1"
+                                                }
+                                            }]
                                         }
                                     }
                                 }
@@ -1383,14 +1386,12 @@
                                 "hosts": {
                                     "type": "array",
                                     "items": {
-                                        "type": "string"
-                                    },
-                                    "default": [
-                                        "lomas-monitoring-dashboard.example.com"
-                                    ],
-                                    "x-onyxia": {
-                                        "hidden": false,
-                                        "overwriteDefaultWith":["{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"]
+                                        "type": "string",
+                                        "default": "lomas-monitoring-dashboard.example.com",
+                                        "x-onyxia": {
+                                            "hidden": false,
+                                            "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
+                                        }
                                     }
                                 }
                             }
