@@ -1314,97 +1314,50 @@
                                         "datasources": {
                                             "type": "array",
                                             "items": {
-                                                "oneOf": [
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "name": { "type": "string", "enum": ["Prometheus"] },
-                                                        "type": { "type": "string", "enum": ["prometheus"] },
-                                                        "uid": { "type": "string", "enum": ["prometheus"] },
-                                                        "access": { "type": "string", "enum": ["proxy"] },
-                                                        "orgId": { "type": "integer", "enum": [1] },
-                                                        "url": { 
-                                                            "type": "string", 
-                                                            "default": "http://lomas-prometheus:9091",
-                                                            "x-onyxia": {
-                                                                "hidden": false,
-                                                                "overwriteDefaultWith": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus:9091"
-                                                            }
-                                                        },
-                                                        "basicAuth": { "type": "boolean", "enum": [false] },
-                                                        "isDefault": { "type": "boolean", "enum": [false] },
-                                                        "version": { "type": "integer", "enum": [1] },
-                                                        "editable": { "type": "boolean", "enum": [true] },
-                                                        "jsonData": {
-                                                            "type": "object",
-                                                                "properties": {
-                                                                "httpMethod": { "type": "string", "enum": ["GET"] }
-                                                            },
-                                                            "additionalProperties": false
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "uid": {
+                                                        "type": "string"
+                                                    },
+                                                    "access": {
+                                                        "type": "string"
+                                                    },
+                                                    "orgId": {
+                                                        "type": "integer"
+                                                    },
+                                                    "port": {
+                                                        "type": "string"
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "default": "http://lomas-{{uid}}:{{port}}",
+                                                        "x-onyxia": {
+                                                            "overwriteDefaultWith": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-{{uid}}:{{port}}"
                                                         }
-                                                    }
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "name": { "type": "string", "enum": ["Tempo"] },
-                                                        "type": { "type": "string", "enum": ["tempo"] },
-                                                        "uid": { "type": "string", "enum": ["tempo"] },
-                                                        "access": { "type": "string", "enum": ["proxy"] },
-                                                        "orgId": { "type": "integer", "enum": [1] },
-                                                        "url": { 
-                                                            "type": "string", 
-                                                            "default": "http://lomas-tempo:3100",
-                                                            "x-onyxia": {
-                                                                "hidden": false,
-                                                                "overwriteDefaultWith": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo:3100"
-                                                            }
-                                                        },
-                                                        "basicAuth": { "type": "boolean", "enum": [false] },
-                                                        "isDefault": { "type": "boolean", "enum": [true] },
-                                                        "version": { "type": "integer", "enum": [1] },
-                                                        "editable": { "type": "boolean", "enum": [true] },
-                                                        "apiVersion": { "type": "integer", "enum": [1] },
-                                                        "stream_over_http_enabled": { "type": "boolean", "enum": [false] }
-                                                    }
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "name": { "type": "string", "enum": ["Loki"] },
-                                                        "type": { "type": "string", "enum": ["loki"] },
-                                                        "uid": { "type": "string", "enum": ["loki"] },
-                                                        "access": { "type": "string", "enum": ["proxy"] },
-                                                        "orgId": { "type": "integer", "enum": [1] },
-                                                        "url": { 
-                                                            "type": "string", 
-                                                            "default": "http://lomas-loki:3100",
-                                                            "x-onyxia": {
-                                                                "hidden": false,
-                                                                "overwriteDefaultWith": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-loki:3100"
-                                                            }
-                                                        },
-                                                        "basicAuth": { "type": "boolean", "enum": [false] },
-                                                        "isDefault": { "type": "boolean", "enum": [false] },
-                                                        "version": { "type": "integer", "enum": [1] },
-                                                        "editable": { "type": "boolean", "enum": [true] },
-                                                        "jsonData": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                            "httpHeaderName1": { "type": "string", "enum": ["X-Scope-OrgID"] }
-                                                            },
-                                                            "additionalProperties": false
-                                                        },
-                                                        "secureJsonData": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                            "httpHeaderValue1": { "type": "string", "enum": ["tenant1"] }
-                                                            },
-                                                            "additionalProperties": false
-                                                        }
+                                                    },
+                                                    "basicAuth": {
+                                                        "type": "boolean",
+                                                        "default": false
+                                                    },
+                                                    "isDefault": {
+                                                        "type": "boolean",
+                                                        "default": false
+                                                    },
+                                                    "version": {
+                                                        "type": "integer",
+                                                        "default": 1
+                                                    },
+                                                    "editable": {
+                                                        "type": "boolean",
+                                                        "default": true
                                                     }
                                                 }
-                                                ]
                                             }
                                         }
                                     }
@@ -1434,15 +1387,14 @@
                                 "hosts": {
                                     "type": "array",
                                     "items": {
-                                        "oneOf": [
-                                            {
-                                                "type": "string",
-                                                "x-onyxia": {
-                                                    "hidden": false,
-                                                    "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
-                                                }
-                                            }
-                                        ]
+                                        "type": "string"
+                                    },
+                                    "default": [
+                                        "lomas-monitoring-dashboard.example.com"
+                                    ],
+                                    "x-onyxia": {
+                                        "hidden": false,
+                                        "overwriteDefaultWith":["{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"]
                                     }
                                 }
                             }
