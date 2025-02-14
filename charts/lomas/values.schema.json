@@ -5,6 +5,18 @@
         "lomas-server": {
             "type": "object",
             "properties": {
+                "fullnameOverride": {
+                    "type": "string",
+                    "x-onyxia": {
+                        "hidden": false,
+                        "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas"
+                    }
+                },
+                "nameOverride": {
+                    "type": "string",
+                    "default": "",
+                    "abc": false
+                },
                 "dashboard": {
                     "title": "Dashboard Configuration",
                     "type": "object",
@@ -260,13 +272,6 @@
                         }
                     }
                 },
-                "fullnameOverride": {
-                    "type": "string",
-                    "x-onyxia": {
-                        "hidden": false,
-                        "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas"
-                    }
-                },
                 "mongodb": {
                     "type": "object",
                     "properties": {
@@ -436,11 +441,6 @@
                             }
                         }
                     }
-                },
-                "nameOverride": {
-                    "type": "string",
-                    "default": "",
-                    "abc": false
                 },
                 "server": {
                     "title": "Server Configuration",
@@ -986,55 +986,53 @@
                     }
                 },
                 "prometheus": {
-                    "prometheus": {
-                        "type": "object",
-                        "properties": {
-                            "create": {
-                                "type": "boolean",
-                                "description": "Determines if Prometheus should be created.",
-                                "default": true
-                            },
-                            "service": {
-                                "type": "object",
-                                "properties": {
-                                    "port": {
-                                        "type": "integer",
-                                        "description": "Port on which the Prometheus service is exposed.",
-                                        "default": 9091
-                                    },
-                                    "target_port": {
-                                        "type": "integer",
-                                        "description": "Target port for the Prometheus service.",
-                                        "default": 9091
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "description": "Type of Kubernetes service.",
-                                        "default": "ClusterIP"
-                                    }
-                                }
-                            },
-                            "fullnameOverride": {
-                                "type": "string",
-                                "description": "Override the full name for Prometheus deployment.",
-                                "x-onyxia": {
-                                    "hidden": false,
-                                    "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus"
-                                }
-                            },
-                            "config": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "description": "Determines if Prometheus should be created.",
+                            "default": true
+                        },
+                        "service": {
                             "type": "object",
-                                "properties": {
-                                    "scrape_interval": {
-                                        "type": "string",
-                                        "description": "Global scrape interval for Prometheus.",
-                                        "default": "5s"
-                                    },
-                                    "evaluation_interval": {
-                                        "type": "string",
-                                        "description": "Global evaluation interval for Prometheus.",
-                                        "default": "5s"
-                                    }
+                            "properties": {
+                                "port": {
+                                    "type": "integer",
+                                    "description": "Port on which the Prometheus service is exposed.",
+                                    "default": 9091
+                                },
+                                "target_port": {
+                                    "type": "integer",
+                                    "description": "Target port for the Prometheus service.",
+                                    "default": 9091
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "description": "Type of Kubernetes service.",
+                                    "default": "ClusterIP"
+                                }
+                            }
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "description": "Override the full name for Prometheus deployment.",
+                            "x-onyxia": {
+                                "hidden": false,
+                                "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus"
+                            }
+                        },
+                        "config": {
+                        "type": "object",
+                            "properties": {
+                                "scrape_interval": {
+                                    "type": "string",
+                                    "description": "Global scrape interval for Prometheus.",
+                                    "default": "5s"
+                                },
+                                "evaluation_interval": {
+                                    "type": "string",
+                                    "description": "Global evaluation interval for Prometheus.",
+                                    "default": "5s"
                                 }
                             }
                         }
