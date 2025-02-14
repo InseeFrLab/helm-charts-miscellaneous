@@ -1387,7 +1387,7 @@
                                     "type": "array",
                                     "items": {
                                         "type": "string",
-                                        "default": "lomas-monitoring-dashboard.example.com",
+                                        "default": "",
                                         "x-onyxia": {
                                             "hidden": false,
                                             "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
