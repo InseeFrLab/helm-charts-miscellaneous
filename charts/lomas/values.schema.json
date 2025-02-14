@@ -1374,10 +1374,7 @@
                                 },
                                 "GF_SECURITY_ADMIN_PASSWORD": {
                                     "type": "string",
-                                    "default": "admin",
-                                    "x-onyxia": {
-                                        "overwriteDefaultWith": "{{project.password}}"
-                                    }
+                                    "default": "admin"
                                 }
                             }
                         },
