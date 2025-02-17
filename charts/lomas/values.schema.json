@@ -1148,7 +1148,7 @@
                             "properties": {
                                 "stream_over_http_enabled": {
                                     "type": "boolean",
-                                    "default": "true"
+                                    "default": true
                                 },
                                 "receivers": {
                                     "type": "object",
@@ -1182,7 +1182,6 @@
                                             "properties": {
                                                 "backend": {
                                                     "type": "string",
-                                                    "enum": ["local", "s3", "gcs", "azure"],
                                                     "default": "local"
                                                 },
                                                 "local": {
@@ -1427,7 +1426,6 @@
                             "properties": {
                                 "annotations": {
                                     "type": "object",
-                                    "abc": false,
                                     "properties": {
                                         "nginx.ingress.kubernetes.io/proxy-read-timeout": {
                                             "type": "string",
@@ -1437,17 +1435,14 @@
                                 },
                                 "className": {
                                     "type": "string",
-                                    "default": "nginx",
-                                    "abc": false
+                                    "default": "nginx"
                                 },
                                 "enabled": {
                                     "type": "boolean",
-                                    "default": true,
-                                    "abc": false
+                                    "default": true
                                 },
                                 "hostname": {
                                     "type": "string",
-                                    "title":"Hostname",
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
