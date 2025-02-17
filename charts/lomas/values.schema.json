@@ -863,15 +863,6 @@
                                         }
                                     }
                                 },
-                                "server": {
-                                    "type": "object",
-                                    "properties": {
-                                        "http_listen_port": {
-                                            "type": "integer",
-                                            "default": 3100
-                                        }
-                                    }
-                                },
                                 "common": {
                                     "type": "object",
                                     "properties": {
@@ -1022,7 +1013,7 @@
                             }
                         },
                         "config": {
-                        "type": "object",
+                            "type": "object",
                             "properties": {
                                 "scrape_interval": {
                                     "type": "string",
@@ -1048,6 +1039,14 @@
                         "service": {
                             "type": "object",
                             "properties": {
+                                "port": {
+                                    "type": "integer",
+                                    "default": 4317
+                                },
+                                "target_port": {
+                                    "type": "integer",
+                                    "default": 4317
+                                },
                                 "type": {
                                     "type": "string",
                                     "default": "ClusterIP"
@@ -1064,19 +1063,6 @@
                         "config": {
                             "type": "object",
                             "properties": {
-                                "receiver": {
-                                    "type": "object",
-                                    "properties": {
-                                        "grpc_port": {
-                                            "type": "integer",
-                                            "default": 4317
-                                        },
-                                        "http_port": {
-                                            "type": "integer",
-                                            "default": 4318
-                                        }
-                                    }
-                                },
                                 "processors": {
                                     "type": "object",
                                     "properties": {
@@ -1129,12 +1115,23 @@
                 "tempo": {
                     "type": "object",
                     "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "default": true
+                        },
                         "service": {
                             "type": "object",
                             "properties": {
+                                "port": {
+                                    "type": "integer",
+                                    "default": 3000
+                                },
+                                "target_port": {
+                                    "type": "integer",
+                                    "default": 3000
+                                },
                                 "type": {
                                     "type": "string",
-                                    "enum": ["ClusterIP", "NodePort", "LoadBalancer"],
                                     "default": "ClusterIP"
                                 }
                             }
@@ -1146,24 +1143,15 @@
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo"
                             }
                         },
-                        "server": {
+                        "config": {
                             "type": "object",
                             "properties": {
-                                "http_listen_port": {
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 65535,
-                                    "default": 3100
-                                }
-                            }
-                        },
-                        "ingester": {
-                            "type": "object",
-                            "properties": {
-                                "max_block_duration": {
-                                "type": "string",
-                                "pattern": "^\\d+m$",
-                                "default": "5m"
+                                "stream_over_http_enabled": {
+                                    "type": "boolean",
+                                    "default": "true"
+                                },
+                                "storage": {
+
                                 }
                             }
                         },
@@ -1186,15 +1174,15 @@
                                                     "default": "/var/tempo/traces"
                                                 }
                                             }
-                                        }
-                                    }
-                                },
-                                "wal": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string",
-                                            "default": "/var/tempo/wal"
+                                        },
+                                        "wal": {
+                                            "type": "object",
+                                            "properties": {
+                                                "path": {
+                                                    "type": "string",
+                                                    "default": "/var/tempo/wal"
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -1214,48 +1202,13 @@
                                                     "properties": {
                                                         "endpoint": {
                                                             "type": "string",
-                                                            "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+$",
                                                             "default": "0.0.0.0:4317"
-                                                        }
-                                                    }
-                                                },
-                                                "http": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "endpoint": {
-                                                            "type": "string",
-                                                            "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+$",
-                                                            "default": "0.0.0.0:4318"
                                                         }
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                }
-                            }
-                        },
-                        "overrides": {
-                            "type": "object",
-                            "properties": {
-                                "metrics_generator_processors": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "default": [
-                                        "service-graphs",
-                                        "span-metrics"
-                                    ]
-                                }
-                            }
-                        },
-                        "persistence": {
-                            "type": "object",
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean",
-                                    "default": false
                                 }
                             }
                         }
@@ -1278,6 +1231,10 @@
                                 "port": {
                                     "type": "integer",
                                     "default": 3000
+                                },
+                                "target_port": {
+                                    "type": "integer",
+                                    "default": 3000
                                 }
                             }
                         },
@@ -1288,89 +1245,181 @@
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-grafana-dashboard"
                             }
                         },
-                        "rbac": {
-                            "type": "object",
-                            "properties": {
-                                "create": {
-                                    "type": "boolean",
-                                    "default": false
-                                },
-                                "namespaced": {
-                                    "type": "boolean",
-                                    "default": true
-                                }
-                            }
+                        "apiVersion": {
+                            "type": "integer",
+                            "default": 1
                         },
                         "datasources": {
                             "type": "object",
                             "properties": {
-                                "datasources.yaml": {
+                                "prometheus": {
                                     "type": "object",
                                     "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "default": "Prometheus"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "default": "prometheus"
+                                        },
+                                        "uid": {
+                                            "type": "string",
+                                            "default": "prometheus"
+                                        },
+                                        "access": {
+                                            "type": "string",
+                                            "default": "proxy"
+                                        },
+                                        "orgId": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "basicAuth": {
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "isDefault": {
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "version": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "editable": {
+                                            "type": "boolean",
+                                            "default": true
+                                        },
+                                        "jsonData": {
+                                            "type": "object",
+                                            "properties": {
+                                                "httpMethod": {
+                                                    "type": "string",
+                                                    "default": "GET"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "tempo": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "default": "Tempo"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "default": "tempo"
+                                        },
+                                        "uid": {
+                                            "type": "string",
+                                            "default": "tempo"
+                                        },
+                                        "access": {
+                                            "type": "string",
+                                            "default": "proxy"
+                                        },
+                                        "orgId": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "basicAuth": {
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "isDefault": {
+                                            "type": "boolean",
+                                            "default": true
+                                        },
+                                        "version": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "editable": {
+                                            "type": "boolean",
+                                            "default": true
+                                        },
                                         "apiVersion": {
                                             "type": "integer",
                                             "default": 1
                                         },
-                                        "datasources": {
-                                            "type": "array",
-                                            "default": [{
-                                                "name": "Prometheus",
-                                                "type": "prometheus",
-                                                "uid": "prometheus",
-                                                "access": "proxy",
-                                                "orgId": 1,
-                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus:9091",
-                                                "basicAuth": false,
-                                                "isDefault": false,
-                                                "version": 1,
-                                                "editable": true,
-                                                "jsonData": {
-                                                    "httpMethod": "GET"
+                                        "stream_over_http_enabled": {
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                },
+                                "loki": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "default": "Loki"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "default": "loki"
+                                        },
+                                        "uid": {
+                                            "type": "string",
+                                            "default": "loki"
+                                        },
+                                        "access": {
+                                            "type": "string",
+                                            "default": "proxy"
+                                        },
+                                        "orgId": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "basicAuth": {
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "isDefault": {
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "version": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "editable": {
+                                            "type": "boolean",
+                                            "default": true
+                                        },
+                                        "jsonData": {
+                                            "type": "object",
+                                            "properties": {
+                                                "httpHeaderName1": {
+                                                    "type": "string",
+                                                    "default": "X-Scope-OrgID"
                                                 }
-                                            }, {
-                                                "name": "Tempo",
-                                                "type": "tempo",
-                                                "uid": "tempo",
-                                                "access": "proxy",
-                                                "orgId": 1,
-                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo:3100",
-                                                "basicAuth": false,
-                                                "isDefault": true,
-                                                "version": 1,
-                                                "editable": true,
-                                                "apiVersion": 1,
-                                                "stream_over_http_enabled": false
-                                            }, {
-                                                "name": "Loki",
-                                                "type": "loki",
-                                                "uid": "loki",
-                                                "access": "proxy",
-                                                "orgId": 1,
-                                                "url": "http://{{project.id}}-{{k8s.randomSubdomain}}-lomas-loki:3100",
-                                                "basicAuth": false,
-                                                "isDefault": false,
-                                                "version": 1,
-                                                "editable": true,
-                                                "jsonData": {
-                                                    "httpHeaderName1": "X-Scope-OrgID"
-                                                },
-                                                "secureJsonData": {
-                                                    "httpHeaderValue1": "tenant1"
+                                            }
+                                        },
+                                        "secureJsonData": {
+                                            "type": "object",
+                                            "properties": {
+                                                "httpHeaderValue1": {
+                                                    "type": "string",
+                                                    "default": "tenant1"
                                                 }
-                                            }]
+                                            }
                                         }
                                     }
                                 }
                             }
                         },
-                        "env": {
+                        "security": {
                             "type": "object",
                             "properties": {
-                                "GF_SECURITY_ADMIN_USER": {
+                                "admin_user": {
                                     "type": "string",
                                     "default": "admin"
                                 },
-                                "GF_SECURITY_ADMIN_PASSWORD": {
+                                "admin_password": {
                                     "type": "string",
                                     "default": "admin"
                                 }
@@ -1379,29 +1428,33 @@
                         "ingress": {
                             "type": "object",
                             "properties": {
-                                "enabled": {
-                                    "type": "boolean",
-                                    "default": true
-                                },
-                                "hosts": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string",
-                                        "default": "",
-                                        "x-onyxia": {
-                                            "hidden": false,
-                                            "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
+                                "annotations": {
+                                    "type": "object",
+                                    "abc": false,
+                                    "properties": {
+                                        "nginx.ingress.kubernetes.io/proxy-read-timeout": {
+                                            "type": "string",
+                                            "default": "3600"
                                         }
                                     }
-                                }
-                            }
-                        },
-                        "persistence": {
-                            "type": "object",
-                            "properties": {
+                                },
+                                "className": {
+                                    "type": "string",
+                                    "default": "nginx",
+                                    "abc": false
+                                },
                                 "enabled": {
                                     "type": "boolean",
-                                    "default": false
+                                    "default": true,
+                                    "abc": false
+                                },
+                                "hostname": {
+                                    "type": "string",
+                                    "title":"Hostname",
+                                    "x-onyxia": {
+                                        "hidden": false,
+                                        "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
+                                    }
                                 }
                             }
                         }
