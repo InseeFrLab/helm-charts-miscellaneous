@@ -1150,59 +1150,56 @@
                                     "type": "boolean",
                                     "default": "true"
                                 },
-                                "storage": {
-
-                                }
-                            }
-                        },
-                        "storage": {
-                            "type": "object",
-                            "properties": {
-                                "trace": {
+                                "receivers": {
                                     "type": "object",
                                     "properties": {
-                                        "backend": {
-                                            "type": "string",
-                                            "enum": ["local", "s3", "gcs", "azure"],
-                                            "default": "local"
-                                        },
-                                        "local": {
+                                        "otlp": {
                                             "type": "object",
                                             "properties": {
-                                                "path": {
-                                                    "type": "string",
-                                                    "default": "/var/tempo/traces"
-                                                }
-                                            }
-                                        },
-                                        "wal": {
-                                            "type": "object",
-                                            "properties": {
-                                                "path": {
-                                                    "type": "string",
-                                                    "default": "/var/tempo/wal"
+                                                "protocols": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "grpc": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "endpoint": {
+                                                                    "type": "string",
+                                                                    "default": "0.0.0.0:4317"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
-                            }
-                        },
-                        "receivers": {
-                            "type": "object",
-                            "properties": {
-                                "otlp": {
+                                },
+                                "storage": {
                                     "type": "object",
                                     "properties": {
-                                        "protocols": {
+                                        "trace": {
                                             "type": "object",
                                             "properties": {
-                                                "grpc": {
+                                                "backend": {
+                                                    "type": "string",
+                                                    "enum": ["local", "s3", "gcs", "azure"],
+                                                    "default": "local"
+                                                },
+                                                "local": {
                                                     "type": "object",
                                                     "properties": {
-                                                        "endpoint": {
+                                                        "path": {
                                                             "type": "string",
-                                                            "default": "0.0.0.0:4317"
+                                                            "default": "/var/tempo/traces"
+                                                        }
+                                                    }
+                                                },
+                                                "wal": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "path": {
+                                                            "type": "string",
+                                                            "default": "/var/tempo/wal"
                                                         }
                                                     }
                                                 }
