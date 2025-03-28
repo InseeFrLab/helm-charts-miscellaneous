@@ -13,7 +13,7 @@
           "properties": {
             "hfModelName": {
               "type": "string",
-              "default": "microsoft/Phi-3.5-mini-instruct",
+              "default": "Qwen/Qwen2.5-1.5B-Instruct",
               "description": "Huggingface namespace of the model to be served",
               "x-onyxia": {
                     "overwriteSchemaWith": "llModel.json"
@@ -251,7 +251,7 @@
             "enabled": {
               "type": "boolean",
               "description": "Add S3 temporary identity inside your environment",
-              "default": false
+              "default": true
             },
             "accessKeyId": {
               "description": "AWS Access Key",
@@ -332,6 +332,20 @@
           "x-onyxia": {
             "hidden": true,
             "overwriteDefaultWith": "{{project.id}}-vllm"
+          }
+        }
+      }
+    },
+    "global": {
+      "description": "Suspend",
+      "type": "object",
+      "properties": {
+        "suspend": {
+          "type": "boolean",
+          "description": "Suspend this service",
+          "default": false,
+          "x-onyxia": {
+            "hidden": true
           }
         }
       }
