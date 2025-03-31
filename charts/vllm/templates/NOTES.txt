@@ -1,9 +1,7 @@
-[Interact with the api](https://user-inesh-vllm.user.lab.sspcloud.fr/v1/)
-[Interact with the api from within the cluster](http://{ include "llm-serving.fullname" . }}.svc.local/v1)
-
+[Interact with the api](https://{{ .Values.llm-serving.ingress.hostname }}/v1/)
+[Interact with the api from within the cluster](http://{{ include "llm-serving.fullname" . }}:{{ .Values.llm-serving.networking.networking.port.number}}/v1)
 
 If you intend to use open-webui you can set the environment var 
-
 {{- if .Values.llm-serving.ingress.enabled }}
 ``` export OPENAI_API_BASE_URL=https://{{ .Values.llm-serving.ingress.hostname }}```
 or
