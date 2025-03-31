@@ -231,7 +231,7 @@
                   "type": "string",
                   "default": "1",
                   "render": "slider",
-                  "sliderMin": 1,
+                  "sliderMin": 0,
                   "sliderMax": 3,
                   "sliderStep": 1,
                   "sliderUnit": "",
