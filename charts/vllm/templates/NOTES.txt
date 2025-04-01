@@ -1,9 +1,7 @@
-[Interact with the api](https://{{ .Values.llm-serving.ingress.hostname }}/v1/)
-[Interact with the api from within the cluster](http://{{ include "llm-serving.fullname" . }}:{{ .Values.llm-serving.networking.networking.port.number}}/v1)
+[Interact with the service](https://{{ index .Values "llm-serving" "ingress" "hostname" }}/v1/)
 
+{{- if index .Values "llm-serving" "ingress" "enabled" }}
 If you intend to use open-webui you can set the environment var 
-{{- if .Values.llm-serving.ingress.enabled }}
-``` export OPENAI_API_BASE_URL=https://{{ .Values.llm-serving.ingress.hostname }}```
-or
+
+``` export OPENAI_API_BASE_URL=https://{{ index .Values "llm-serving" "ingress" "hostname" }}```
 {{- end }}
-``` export OPENAI_API_BASE_URL=http://{{ include "llm-serving.fullname" . }}:{{ .Values.llm-serving.networking.networking.port.number}}```
