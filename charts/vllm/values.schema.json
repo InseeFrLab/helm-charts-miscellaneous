@@ -63,40 +63,7 @@
                 "version": {
                   "description": "supported versions",
                   "type": "string",
-                  "listEnum": [
-                    "vllm/vllm-openai:v0.8.2",
-                    "vllm/vllm-openai:v0.7.0",
-                    "vllm/vllm-openai:v0.6.4",
-                    "vllm/vllm-openai:v0.6.0"
-                  ],
-                  "render": "list",
-                  "pattern": "^[a-z0-9-_./]+(:[a-z0-9-_.]+)?$",
-                  "hidden": {
-                    "value": true,
-                    "path": "service/image/custom/enabled"
-                  },
                   "default": "vllm/vllm-openai:v0.8.2"
-                },
-                "custom": {
-                  "description": "use a custom docker image",
-                  "type": "object",
-                  "properties": {
-                    "enabled": {
-                      "title": "custom image",
-                      "type": "boolean",
-                      "description": "use a custom vllm docker image",
-                      "default": false
-                    },
-                    "version": {
-                      "description": "unsupported version",
-                      "type": "string",
-                      "default": "vllm/vllm-openai:v0.8.2",
-                      "hidden": {
-                        "value": false,
-                        "path": "service/image/custom/enabled"
-                      }
-                    }
-                  }
                 }
               }
             }

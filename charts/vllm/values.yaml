@@ -12,9 +12,6 @@ llm-serving:
     image:
       version: "vllm/vllm-openai:v0.8.2"
       pullPolicy: IfNotPresent
-      custom:
-        enabled: false
-        version: ""
 
   resources: {}
 
