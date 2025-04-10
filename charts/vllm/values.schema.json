@@ -63,10 +63,11 @@
                 "version": {
                   "description": "supported versions",
                   "type": "string",
-                  "default": "vllm/vllm-openai:v0.8.2",
+                  "default": "vllm/vllm-openai:v0.8.3",
                   "listEnum": [
-                    "vllm/vllm-openai:v0.8.2",
+                    "vllm/vllm-openai:v0.8.3",
                     "public.ecr.aws/q9t5s3a7/vllm-cpu-release-repo:v0.8.3",
+                    "vllm/vllm-openai:v0.8.2",
                     "vllm/vllm-openai:v0.7.0"
                     ],
                   "render": "list"
