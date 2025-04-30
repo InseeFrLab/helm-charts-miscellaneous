@@ -10,7 +10,7 @@ llm-serving:
 
   service:
     image:
-      version: "vllm/vllm-openai:v0.8.4"
+      version: "vllm/vllm-openai:v0.8.5"
       pullPolicy: IfNotPresent
 
   resources: {}
