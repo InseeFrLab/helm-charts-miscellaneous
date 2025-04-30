@@ -1,6 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:recommended",
+    ":disableDependencyDashboard"
+  ],
+  "bumpVersion": "patch",
+  "helmv3": {
+    "enabled": true,
+    "includePaths": [
+      "charts/vllm/**"
+    ]
+  }
 }
