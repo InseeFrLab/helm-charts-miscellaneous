@@ -10,5 +10,18 @@
     "includePaths": [
       "charts/vllm/**"
     ]
-  }
+  },
+  "helm-values": {
+    "enabled": true,
+    "includePaths": [
+      "charts/vllm/**"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["helm-values"],
+      "matchPackageNames": ["vllm/vllm-openai"],
+      "versioning": "pep440"
+    }
+  ]
 }
