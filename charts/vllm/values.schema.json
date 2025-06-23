@@ -23,7 +23,7 @@
               "type": "string",
               "render": "textArea",
               "title": "Command arguments",
-              "default": "--gpu-memory-utilization \"0.95\" --dtype \"auto\" --max-model-len \"8200\"",
+              "default": "--gpu-memory-utilization \"0.8\" --dtype \"half\" --max-model-len \"8200\"",
               "description": "Command arguments"
               }
             }

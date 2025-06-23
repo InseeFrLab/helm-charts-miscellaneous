@@ -21,7 +21,7 @@ llm-serving:
   llm:
     hfModelName: Qwen/Qwen2.5-1.5B-Instruct
     localPath: "/tmp/.cache/huggingface"
-    args: '--gpu-memory-utilization "0.95" --dtype "auto" --max-model-len "8200"'
+    args: '--gpu-memory-utilization "0.8" --dtype "half" --max-model-len "8200"'
 
   networking:
     port:
