@@ -2,7 +2,75 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "llm-serving": {
+    "api" : {
+      "type": "object",
+      "title": "API configuration",
+        "properties": {
+            "env": {
+                "type" : "object",
+                "title" : "Database informations",
+                "properties": {
+                    "DB_HOST" : {
+                        "type" : "string",
+                        "default" : "160.85.252.201",
+                        "description": "Database host adress",
+                        "title": "Database host"
+                    },
+                    "DB_PORT" : {
+                        "type" : "string",
+                        "default" : "18001",
+                        "description": "Database port name",
+                        "title": "Database port"
+                    },
+                    "DB_SCHEMA" : {
+                        "type" : "string",
+                        "default" : "experiment",
+                        "description": "Database schema",
+                        "title": "Database schema"
+                    },
+                    "DB_DATABASE" : {
+                        "type" : "string",
+                        "default" : "postgress",
+                        "description": "Database type",
+                        "title": "Database type"
+                    },
+                    "DB_USERNAME" : {
+                        "type" : "string",
+                        "default" : "",
+                        "description": "Database user username",
+                        "title": "Database username"
+                    },
+                    "DB_PASS" : {
+                        "type" : "string",
+                        "default" : "",
+                        "render": "password",
+                        "description": "Database user password",
+                        "title": "Database password"
+                    }
+                }
+            }
+        }
+    },
+    "ui" : {
+      "type": "object",
+      "title": "UI configuration",
+        "properties": {
+            "env": {
+                "type" : "object",
+                "title" : "UI Admin Mail informations (Deprecated)",
+                "properties": {
+                    "ADMIN_MAIL" : {
+                        "type" : "string",
+                        "default" : "admin@example.com",
+                        "description": "Deprecated",
+                        "title": "Admin mail information"
+                    }
+                }
+            }
+        }
+
+    },
+    "vllm": {
       "type": "object",
       "title": "VLLM configuration",
       "properties": {
@@ -23,7 +91,7 @@
               "type": "string",
               "render": "textArea",
               "title": "Command arguments",
-              "default": "--gpu-memory-utilization \"0.8\" --dtype \"half\" --max-model-len \"8200\"",
+              "default": "--gpu-memory-utilization \"0.95\" --dtype \"auto\" --max-model-len \"8200\"",
               "description": "Command arguments"
               }
             }
@@ -226,7 +294,7 @@
             "enabled": {
               "type": "boolean",
               "description": "Add S3 temporary identity inside your environment",
-              "default": true
+              "default": false
             },
             "accessKeyId": {
               "description": "AWS Access Key",

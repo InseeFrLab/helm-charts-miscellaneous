@@ -1,0 +1,1 @@
+[Interact with statbot](https://{{ index .Values "ingress" "hostname" }})
