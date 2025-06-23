@@ -1029,6 +1029,25 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/lomas-server-0.0.2/lomas-server-0.0.2.tgz
     version: 0.0.2
+  statbot:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2025-06-23T14:43:52.541742422Z"
+    dependencies:
+    - name: statbot
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.0.2
+    description: Statbot is an interface allowing a user to get relevant informations
+      from Open Governement Data using only english or german questions. This interface
+      uses LLMs for NL-to-SQL translation, deploying them using our custom helm-chart
+      of vLLM.
+    digest: 94a51b6852b867c4a47fc335592a5884c82909d4a996b2d16d88020d545a68a2
+    icon: https://raw.githubusercontent.com/vllm-project/vllm/refs/heads/main/docs/source/assets/logos/vllm-logo-only-light.png
+    name: statbot
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/statbot-0.0.2/statbot-0.0.2.tgz
+    version: 0.0.2
   vllm:
   - apiVersion: v2
     appVersion: 0.0.9
@@ -1446,4 +1465,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vllm-0.0.2/vllm-0.0.2.tgz
     version: 0.0.2
-generated: "2025-06-23T14:36:33.998026234Z"
+generated: "2025-06-23T14:43:52.541951796Z"
