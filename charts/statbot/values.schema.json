@@ -2,89 +2,95 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "api" : {
+    "statbot" : {
       "type": "object",
-      "title": "API configuration",
+      "title": "Stabot configuration",
       "properties": {
-        "env": {
-          "type" : "object",
-          "title" : "Database informations",
+        "api" : {
+          "type": "object",
+          "title": "API configuration",
           "properties": {
-            "DB_HOST" : {
-              "type" : "string",
-              "default" : "160.85.252.201",
-              "title": "Database host"
-            },
-            "DB_PORT" : {
-              "type" : "string",
-              "default" : "18001",
-              "title": "Database port"
-            },
-            "DB_SCHEMA" : {
-              "type" : "string",
-              "default" : "experiment",
-              "title": "Database schema"
-            },
-            "DB_DATABASE" : {
-              "type" : "string",
-              "default" : "postgress",
-              "title": "Database type"
-            },
-            "DB_USERNAME" : {
-              "type" : "string",
-              "default" : "",
-              "title": "Database username"
-            },
-            "DB_PASS" : {
-              "type" : "string",
-              "default" : "",
-              "render": "password",
-              "title": "Database password"
-            }
-          }
-        }
-      }
-    },
-    "ui" : {
-      "type": "object",
-      "title": "UI configuration",
-      "properties": {
-        "env": {
-          "type" : "object",
-          "title" : "UI Admin Mail informations (Deprecated)",
-          "properties": {
-            "ADMIN_MAIL" : {
-              "type" : "string",
-              "default" : "admin@example.com",
-              "description": "Deprecated",
-              "title": "Admin mail information"
-            }
-          }
-        }
-      }
-    },
-    "vllm" : {
-      "type": "object",
-      "title": "VLLM configuration",
-      "properties": {
-        "deployment": {
-          "type" : "object",
-          "title" : "VLLM Deployment informations",
-          "properties": {
-            "hf_token" : {
-              "type" : "string",
-              "default" : "",
-              "render": "password",
-              "title": "Huggingface token"
-            },
-            "args" : {
+            "env": {
               "type" : "object",
-              "title" : "LLM model arguments",
+              "title" : "Database informations",
               "properties": {
-                "model": {
+                "DB_HOST" : {
                   "type" : "string",
-                  "default" : "meta-llama/Llama-3.2-3B-Instruct",
-                  "title": "Model name"
+                  "default" : "160.85.252.201",
+                  "title": "Database host"
+                },
+                "DB_PORT" : {
+                  "type" : "string",
+                  "default" : "18001",
+                  "title": "Database port"
+                },
+                "DB_SCHEMA" : {
+                  "type" : "string",
+                  "default" : "experiment",
+                  "title": "Database schema"
+                },
+                "DB_DATABASE" : {
+                  "type" : "string",
+                  "default" : "postgress",
+                  "title": "Database type"
+                },
+                "DB_USERNAME" : {
+                  "type" : "string",
+                  "default" : "",
+                  "title": "Database username"
+                },
+                "DB_PASS" : {
+                  "type" : "string",
+                  "default" : "",
+                  "render": "password",
+                  "title": "Database password"
+                }
+              }
+            }
+          }
+        },
+        "ui" : {
+          "type": "object",
+          "title": "UI configuration",
+          "properties": {
+            "env": {
+              "type" : "object",
+              "title" : "UI Admin Mail informations (Deprecated)",
+              "properties": {
+                "ADMIN_MAIL" : {
+                  "type" : "string",
+                  "default" : "admin@example.com",
+                  "description": "Deprecated",
+                  "title": "Admin mail information"
+                }
+              }
+            }
+          }
+        },
+        "vllm" : {
+          "type": "object",
+          "title": "VLLM configuration",
+          "properties": {
+            "deployment": {
+              "type" : "object",
+              "title" : "VLLM Deployment informations",
+              "properties": {
+                "hf_token" : {
+                  "type" : "string",
+                  "default" : "",
+                  "render": "password",
+                  "title": "Huggingface token"
+                },
+                "args" : {
+                  "type" : "object",
+                  "title" : "LLM model arguments",
+                  "properties": {
+                    "model": {
+                      "type" : "string",
+                      "default" : "meta-llama/Llama-3.2-3B-Instruct",
+                      "title": "Model name"
+                    }
+                  }
                 }
               }
             }
