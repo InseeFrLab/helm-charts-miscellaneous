@@ -13,38 +13,32 @@
             "DB_HOST" : {
               "type" : "string",
               "default" : "160.85.252.201",
-              "description": "Database host adress",
               "title": "Database host"
             },
             "DB_PORT" : {
               "type" : "string",
               "default" : "18001",
-              "description": "Database port name",
               "title": "Database port"
             },
             "DB_SCHEMA" : {
               "type" : "string",
               "default" : "experiment",
-              "description": "Database schema",
               "title": "Database schema"
             },
             "DB_DATABASE" : {
               "type" : "string",
               "default" : "postgress",
-              "description": "Database type",
               "title": "Database type"
             },
             "DB_USERNAME" : {
               "type" : "string",
               "default" : "",
-              "description": "Database user username",
               "title": "Database username"
             },
             "DB_PASS" : {
               "type" : "string",
               "default" : "",
               "render": "password",
-              "description": "Database user password",
               "title": "Database password"
             }
           }
@@ -81,7 +75,6 @@
               "type" : "string",
               "default" : "",
               "render": "password",
-              "description": "Huggingface token",
               "title": "Huggingface token"
             },
             "args" : {
@@ -91,7 +84,6 @@
                 "model": {
                   "type" : "string",
                   "default" : "meta-llama/Llama-3.2-3B-Instruct",
-                  "description": "LLM model name",
                   "title": "Model name"
                 }
               }
