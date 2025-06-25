@@ -30,7 +30,7 @@ statbot:
 
   vllm:
     global:
-    suspend: false # Allow scaling the app to 0
+      suspend: false # Allow scaling the app to 0
 
     nameOverride: ""
     fullnameOverride: "llm-serving"
