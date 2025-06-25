@@ -1031,6 +1031,24 @@ entries:
     version: 0.0.2
   statbot:
   - apiVersion: v2
+    appVersion: 0.0.4
+    created: "2025-06-25T12:41:16.822442828Z"
+    dependencies:
+    - name: statbot
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.0.4
+    description: Statbot is an interface allowing a user to get relevant informations
+      from Open Governement Data using only english or german questions. This interface
+      uses LLMs for NL-to-SQL translation, deploying them using our custom helm-chart
+      of vLLM.
+    digest: 5736cbea564bbd8c139d62f6b6ec71bbe751867d441bb18341dd09fa19d1e8b4
+    icon: https://raw.githubusercontent.com/vllm-project/vllm/refs/heads/main/docs/source/assets/logos/vllm-logo-only-light.png
+    name: statbot
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/statbot-0.0.7/statbot-0.0.7.tgz
+    version: 0.0.7
+  - apiVersion: v2
     appVersion: 0.0.2
     created: "2025-06-25T06:18:03.089843872Z"
     dependencies:
@@ -1553,4 +1571,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vllm-0.0.2/vllm-0.0.2.tgz
     version: 0.0.2
-generated: "2025-06-25T09:49:07.903413957Z"
+generated: "2025-06-25T12:41:16.822670587Z"
