@@ -71,6 +71,27 @@
           "type": "object",
           "title": "VLLM configuration",
           "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Use vllm to deploy a llm",
+              "default": true
+            },
+            "nodeSelector": {
+              "type": "object",
+              "description": "NodeSelector",
+              "default": {},
+              "x-onyxia": {
+                "overwriteDefaultWith": "region.nodeSelector",
+                "overwriteSchemaWith": "nodeSelector-gpu.json"
+              }
+            },
+            "fullnameOverride": {
+              "type": "string",
+              "x-onyxia": {
+                "hidden": true,
+                "overwriteDefaultWith": "{{project.id}}-vllm"
+              }
+            },
             "llm": {
               "type": "object",
               "form": true,
@@ -359,22 +380,22 @@
                   "default": "projet-models-hf/diffusion/hf_hub"
                 }
               }
-            },
-            "nodeSelector": {
-              "type": "object",
-              "description": "NodeSelector",
-              "default": {},
-              "x-onyxia": {
-                "overwriteDefaultWith": "region.nodeSelector",
-                "overwriteSchemaWith": "nodeSelector-gpu.json"
-              }
-            },
-            "fullnameOverride": {
+            }
+          }
+        },
+        "deployedllm" : {
+          "type": "object",
+          "title": "VLLM configuration",
+          "properties": {
+            "address": {
               "type": "string",
-              "x-onyxia": {
-                "hidden": true,
-                "overwriteDefaultWith": "{{project.id}}-vllm"
-              }
+              "description": "Pre-deployed llm address",
+              "default": ""
+            },
+            "accessToken": {
+              "type": "string",
+              "description": "Pre-deployed llm access token",
+              "default": ""
             }
           }
         }
