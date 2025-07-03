@@ -41,15 +41,15 @@
           "x-onyxia": {
           "overwriteDefaultWith": "{{project.id}}"
           }
-        }
-      },
-      "password": {
-        "title": "User password",
-        "type": "string",
-        "default": "changeme",
-        "render": "password",
-        "x-onyxia": {
-          "overwriteDefaultWith": "{{project.password}}"
+        },
+        "password": {
+          "title": "User password",
+          "type": "string",
+          "default": "changeme",
+          "render": "password",
+          "x-onyxia": {
+            "overwriteDefaultWith": "{{project.password}}"
+          }
         }
       }
     },
