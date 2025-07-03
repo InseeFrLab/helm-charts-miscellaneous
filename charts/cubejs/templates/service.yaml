@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - name: sql-api
+      port: {{ .Values.sqlApi.port }}
+      targetPort: {{ .Values.sqlApi.targetPort }}
+      protocol: TCP
   selector:
     {{- include "cubejs.selectorLabels" . | nindent 4 }}

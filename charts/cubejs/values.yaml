@@ -44,6 +44,12 @@ service:
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
   port: 4000
+
+sqlApi: 
+  targetPort: 15432
+  port: 15432
+  username: admin
+  password: changeme
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
   enabled: false

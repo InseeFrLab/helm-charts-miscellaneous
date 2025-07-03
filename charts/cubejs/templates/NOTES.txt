@@ -1,3 +1,9 @@
 {{- if .Values.ingress.enabled }}
-Got to the [service dashboard]( https://{{.Values.ingress.hostname}} )
+Go to the [service dashboard]( https://{{.Values.ingress.hostname}} )
+To interact with the service from within the cluster, connect to the service : http://{{ include "cubejs.fullname" . }}:{{ .Values.service.port }}
+To interact with the sql api : 
+  - host: {{ include "cubejs.fullname" . }}
+  - port: {{ .Values.sqlApi.port }}
+  - username: {{ .Values.sqlApi.username }}
+  - password: {{ .Values.sqlApi.password }}
 {{- end }}

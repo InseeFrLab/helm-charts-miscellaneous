@@ -29,6 +29,30 @@
         }
       }
     },
+    "sqlApi": {
+      "title": "Sql Api",
+      "type": "object",
+      "form": true,
+      "properties": {
+        "username": {
+          "title": "User name",
+          "type": "string",
+          "default": "admin",
+          "x-onyxia": {
+          "overwriteDefaultWith": "{{project.id}}"
+          }
+        }
+      },
+      "password": {
+        "title": "User password",
+        "type": "string",
+        "default": "changeme",
+        "render": "password",
+        "x-onyxia": {
+          "overwriteDefaultWith": "{{project.password}}"
+        }
+      }
+    },
     "model": {
       "title": "Model",
       "type": "string",

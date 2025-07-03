@@ -72,10 +72,18 @@ spec:
             value: "30"
           - name: CUBEJS_DEV_MODE
             value: "true"
+          - name: CUBEJS_PG_SQL_PORT
+            value: {{ .Values.sqlApi.targetPort | quote }}
+          - name: CUBEJS_SQL_USER
+            value: {{ .Values.sqlApi.username }}
+          - name: CUBEJS_SQL_PASSWORD
+            value: {{ .Values.sqlApi.password }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+            - name: sql-api
+              containerPort: {{ .Values.sqlApi.targetPort}}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
