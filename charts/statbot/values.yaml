@@ -84,4 +84,5 @@ statbot:
   
   deployedllm:
     address: ""
+    modelName: ""
     accessToken: ""

@@ -390,7 +390,12 @@
             "address": {
               "type": "string",
               "description": "Pre-deployed llm address",
-              "default": ""
+              "default": "https://llm.lab.sspcloud.fr/api"
+            },
+            "modelName": {
+              "type": "string",
+              "description": "Pre-deployed llm model name",
+              "default": "Qwen/Qwen2.5-32B-Instruct"
             },
             "accessToken": {
               "type": "string",
