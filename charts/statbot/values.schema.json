@@ -385,12 +385,12 @@
         },
         "deployedllm" : {
           "type": "object",
-          "title": "VLLM configuration",
+          "title": "Pre-deployed LLM connection info",
           "properties": {
             "address": {
               "type": "string",
               "description": "Pre-deployed llm address",
-              "default": "https://llm.lab.sspcloud.fr/api"
+              "default": "llm.lab.sspcloud.fr/api"
             },
             "modelName": {
               "type": "string",
