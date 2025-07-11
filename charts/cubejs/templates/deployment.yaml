@@ -38,7 +38,7 @@ spec:
             - -c
             - |
               echo 'fetch the model';
-              mkdir -p /model && wget -O /model/model.yml {{ .Values.model }} || true 
+              mkdir -p /model && wget -O /model/model.yml {{ .Values.model }} || true
           volumeMounts:
           - name: model
             mountPath: "/model"
@@ -62,15 +62,15 @@ spec:
           env:
           - name: CUBEJS_DB_TYPE
             value: duckdb
-          - name: CUBEJS_DB_DUCKDB_S3_ACCESS_KEY_ID	
+          - name: CUBEJS_DB_DUCKDB_S3_ACCESS_KEY_ID
             value: {{ .Values.s3.accessKeyId }}
-          - name: CUBEJS_DB_DUCKDB_S3_SECRET_ACCESS_KEY		
+          - name: CUBEJS_DB_DUCKDB_S3_SECRET_ACCESS_KEY
             value: {{ .Values.s3.secretAccessKey }}
-          - name: CUBEJS_DB_DUCKDB_S3_ENDPOINT		
+          - name: CUBEJS_DB_DUCKDB_S3_ENDPOINT
             value: {{ .Values.s3.endpoint }}
-          - name: CUBEJS_DB_DUCKDB_S3_REGION		
+          - name: CUBEJS_DB_DUCKDB_S3_REGION
             value: {{ .Values.s3.defaultRegion }}
-          - name: CUBEJS_DB_DUCKDB_S3_SESSION_TOKEN		
+          - name: CUBEJS_DB_DUCKDB_S3_SESSION_TOKEN
             value: {{ .Values.s3.sessionToken }}
             {{- if .Values.s3.pathStyleAccess }}
           - name: CUBEJS_DB_DUCKDB_S3_URL_STYLE
@@ -103,4 +103,3 @@ spec:
             - name: model
               mountPath: /cube/conf/model
           {{- end }}
-
