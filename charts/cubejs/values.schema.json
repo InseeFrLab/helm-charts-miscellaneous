@@ -166,23 +166,9 @@
             "value": false,
             "path": "enabled",
             "isPathRelative": true
+         }
         }
-        },
-        "workingDirectoryPath": {
-        "title": "Working directory path",
-        "type": "string",
-        "default": "",
-        "x-onyxia": {
-            "overwriteDefaultWith": "{{s3.workingDirectoryPath}}"
-        },
-        "hidden": {
-            "value": false,
-            "path": "enabled",
-            "isPathRelative": true
-        }
-          }
-        }
-      
+      }      
     },
     "ingress": {
       "title": "Ingress Details",

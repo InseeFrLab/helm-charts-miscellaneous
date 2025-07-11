@@ -24,19 +24,25 @@ spec:
       volumes:
         - name: model
           emptyDir: {}
+      {{- if .Values.model }}
       initContainers:
         - name: fetch-model
           image: inseefrlab/onyxia-base:latest
           imagePullPolicy: IfNotPresent
+          resources:
+            {{- toYaml .Values.resourcesInit | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           command:
             - sh
             - -c
             - |
               echo 'fetch the model';
-              mkdir -p /model && wget -O /model/model.yml {{ .Values.model }};
+              mkdir -p /model && wget -O /model/model.yml {{ .Values.model }} || true 
           volumeMounts:
           - name: model
             mountPath: "/model"
+      {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -47,12 +53,12 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- with .Values.securityContext }}
-          securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
           image: {{ .Values.service.image.version }}
           imagePullPolicy: {{ .Values.service.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           env:
           - name: CUBEJS_DB_TYPE
             value: duckdb
@@ -66,6 +72,10 @@ spec:
             value: {{ .Values.s3.defaultRegion }}
           - name: CUBEJS_DB_DUCKDB_S3_SESSION_TOKEN		
             value: {{ .Values.s3.sessionToken }}
+            {{- if .Values.s3.pathStyleAccess }}
+          - name: CUBEJS_DB_DUCKDB_S3_URL_STYLE
+            value: path
+            {{- end }}
           - name: CUBEJS_DB_DUCKDB_EXTENSIONS
             value: httpfs
           - name: CUBEJS_CONCURRENCY
@@ -88,7 +98,9 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.model }}
           volumeMounts:
             - name: model
               mountPath: /cube/conf/model
+          {{- end }}
 
