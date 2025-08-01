@@ -67,6 +67,18 @@ entries:
   cubejs:
   - apiVersion: v2
     appVersion: v.1.3.28
+    created: "2025-08-01T09:59:25.917747229Z"
+    description: Cubejs is a semantic layer that helps you model, organize and query
+      you data using cubes.
+    digest: 121d17cfe93694b52bc6dcaa43e8cc3064e30e99f532e3989f0a35a3f42cc3c7
+    icon: https://minio.lab.sspcloud.fr/projet-onyxia/assets/servicesImg/cubejs.png
+    name: cubejs
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/cubejs-0.0.7/cubejs-0.0.7.tgz
+    version: 0.0.7
+  - apiVersion: v2
+    appVersion: v.1.3.28
     created: "2025-07-16T07:49:16.604303943Z"
     digest: 175618594f749c5ced1b831ff6d71ea8c82836a2305744fe298763a9895ca5d8
     icon: https://minio.lab.sspcloud.fr/projet-onyxia/assets/servicesImg/cubejs.png
@@ -1740,4 +1752,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vllm-0.0.2/vllm-0.0.2.tgz
     version: 0.0.2
-generated: "2025-07-16T07:49:16.60447315Z"
+generated: "2025-08-01T09:59:25.918001683Z"
