@@ -21,6 +21,10 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       volumes:
         - name: model
           persistentVolumeClaim:
@@ -39,10 +43,11 @@ spec:
             - -c
             - |
               echo 'fetch the model';
-              mkdir -p /model && wget -O /model/model.yml {{ .Values.model }} || true
+              mkdir -p /cube/conf/model && wget -O /cube/conf/model/model.yml {{ .Values.model }} || true
           volumeMounts:
-          - name: model
-            mountPath: "/model"
+            - name: model
+              mountPath: /cube/conf/model
+              subPath: model
       {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -102,3 +107,4 @@ spec:
           volumeMounts:
             - name: model
               mountPath: /cube/conf/model
+              subPath: model
