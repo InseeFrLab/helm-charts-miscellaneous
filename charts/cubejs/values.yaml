@@ -77,3 +77,6 @@ s3:
   secretAccessKey: ""
   sessionToken: ""
   pathStyleAccess: false
+
+persistence:
+  size: 3Gi
