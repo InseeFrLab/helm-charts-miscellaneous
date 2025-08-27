@@ -99,7 +99,7 @@
               "properties": {
                 "hfModelName": {
                   "type": "string",
-                  "default": "Qwen/Qwen2.5-1.5B-Instruct",
+                  "default": "meta-llama/Llama-3.2-3B-Instruct",
                   "description": "Huggingface namespace of the model to be served",
                   "x-onyxia": {
                         "overwriteSchemaWith": "llModel.json"
