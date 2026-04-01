@@ -23,7 +23,7 @@
               "type": "string",
               "render": "textArea",
               "title": "Command arguments",
-              "default": "--gpu-memory-utilization \"0.8\" --dtype \"half\" --max-model-len \"8200\"",
+              "default": "--gpu-memory-utilization \"0.9\" --dtype \"auto\"",
               "description": "Command arguments"
               }
             }
@@ -63,8 +63,10 @@
                 "version": {
                   "description": "supported versions",
                   "type": "string",
-                  "default": "vllm/vllm-openai:v0.17.0",
+                  "default": "vllm/vllm-openai:v0.18.1",
                   "enum": [
+                    "vllm/vllm-openai:v0.18.1",
+                    "public.ecr.aws/q9t5s3a7/vllm-cpu-release-repo:v0.18.1",
                     "vllm/vllm-openai:v0.17.0",
                     "public.ecr.aws/q9t5s3a7/vllm-cpu-release-repo:v0.17.0",
                     "vllm/vllm-openai:v0.16.0",
