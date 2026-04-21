@@ -29,7 +29,7 @@ spec:
         - name: model
           persistentVolumeClaim:
             claimName:  {{ include "cubejs.fullname" . }}
-      {{- if .Values.model }}
+      {{- if .Values.modelUrl }}
       initContainers:
         - name: fetch-model
           image: inseefrlab/onyxia-base:latest
@@ -43,7 +43,7 @@ spec:
             - -c
             - |
               echo 'fetch the model';
-              mkdir -p /cube/conf/model && wget -O /cube/conf/model/model.yml {{ .Values.model }} || true
+              mkdir -p /cube/conf/model && wget -O /cube/conf/model/model.yml {{ .Values.modelUrl }} || true
           volumeMounts:
             - name: model
               mountPath: /cube/conf/model
@@ -61,8 +61,6 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ .Values.service.image.version }}
           imagePullPolicy: {{ .Values.service.image.pullPolicy }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
             {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           env:
@@ -108,3 +106,9 @@ spec:
             - name: model
               mountPath: /cube/conf/model
               subPath: model
+      {{- if .Values.modelCM }}
+      volumes: 
+      - name: model
+        configMap: 
+          name: {{ include "cubejs.fullname" . }}
+    {{- end }}

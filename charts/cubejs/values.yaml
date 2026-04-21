@@ -68,7 +68,9 @@ ingress:
   annotations: []
   hostname: chart-example.local
 
-model: ""
+modelUrl: ""
+
+modelCM: "toto" 
 
 s3:
   accessKeyId: ""
