@@ -105,7 +105,6 @@ spec:
           volumeMounts:
             - name: model
               mountPath: /cube/conf/model
-              subPath: model
       {{- if .Values.modelCM }}
       volumes: 
       - name: model

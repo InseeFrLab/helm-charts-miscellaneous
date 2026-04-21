@@ -70,7 +70,7 @@ ingress:
 
 modelUrl: ""
 
-modelCM: "toto" 
+modelCM: "" 
 
 s3:
   accessKeyId: ""
