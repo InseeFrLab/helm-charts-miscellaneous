@@ -26,10 +26,24 @@
                             "default": {},
                             "abc": false
                         },
-                        "create": {
+                        "enabled": {
                             "type": "boolean",
                             "default": true,
                             "abc": false
+                        },
+                        "config":{
+                            "description": "Config dashboard",
+                            "type":"object",
+                            "properties": {
+                                "serverUrl":{
+                                    "type":"string",
+                                    "x-onyxia": {
+                                        "hidden": false,
+                                        "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-server-{{k8s.domain}}"
+                                    }
+                                }
+                            }
+
                         },
                         "image": {
                             "description": "Docker Image",
@@ -47,19 +61,21 @@
                                 },
                                 "repository": {
                                     "type": "string",
-                                    "default": "dsccadminch/lomas_admin_dashboard",
+                                    "default": "dsccadminch/lomas-raw",
                                     "enum": [
+                                        "dsccadminch/lomas-raw",
                                         "dsccadminch/lomas_admin_dashboard"
                                     ]
                                 },
                                 "tag": {
                                     "type": "string",
-                                    "default": "0.4.0",
+                                    "default": "0.5.1",
                                     "enum": [
                                         "latest",
                                         "0.3.1",
                                         "0.3.5",
-                                        "0.4.0"
+                                        "0.4.0",
+                                        "0.5.1"
                                     ]
                                 }
                             }
@@ -98,6 +114,38 @@
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}"
+                                    }
+                                }
+                            }
+                        },
+                        "streamlitServerSecrets":{
+                            "type":"object",
+                            "properties": {
+                                "value": {
+                                    "type":"object",
+                                    "properties": {
+                                        "auth":{
+                                            "type":"object",
+                                            "properties": {
+                                                "redirectUri": {
+                                                    "type":"string",
+                                                    "title": "RedirectURI",
+                                                    "x-onyxia": {
+                                                        "hidden": false,
+                                                        "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"
+                                                    }
+                                                    
+                                                },
+                                                "serverMetadataUrl": {
+                                                    "type":"string",
+                                                    "title":"Server Metadata URL",
+                                                    "x-onyxia": {
+                                                        "hidden": false,
+                                                        "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}/.well_known/openid-configuration"
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -272,176 +320,6 @@
                         }
                     }
                 },
-                "mongodb": {
-                    "type": "object",
-                    "properties": {
-                        "max_pool_size": {
-                            "description": "Total number of open connections (active + idle) allowed in the pool.",
-                            "type": "integer",
-                            "default": 100
-                        },
-                        "min_pool_size": {
-                            "description": "Minimum number of idle connections that will be maintained, even when the application is idle or under low load.",
-                            "type": "integer",
-                            "default": 2
-                        },
-                        "max_connecting": {
-                            "description": "Controls the number of simultaneous new connection attempts being made.",
-                            "type": "integer",
-                            "default": 2
-                        },
-                        "architecture": {
-                            "type": "string",
-                            "default": "standalone",
-                            "abc": false
-                        },
-                        "auth": {
-                            "type": "object",
-                            "description": "Authentification configuration",
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean",
-                                    "description": "add mongodb to server",
-                                    "default": true
-                                },
-                                "rootUser": {
-                                    "type": "string",
-                                    "description": "root name",
-                                    "default": "root"
-                                },
-                                "rootPassword": {
-                                    "type": "string",
-                                    "description": "root password",
-                                    "default": "changeme",
-                                    "x-onyxia": {
-                                        "overwriteDefaultWith": "{{project.password}}"
-                                    }
-                                },
-                                "databases": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "default databases",
-                                    "default": ["defaultdb"]
-                                },
-                                "usernames": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "default usernames",
-                                    "default": ["user"]
-                                },
-                                "passwords": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "default passwords",
-                                    "default": ["change_me"],
-                                    "x-onyxia": {
-                                        "overwriteDefaultWith": ["{{project.password}}"]
-                                    }
-                                }
-                            }
-                        },
-                        "discoverable": {
-                            "type": "object",
-                            "abc": false,
-                            "properties": {
-                                "allow": {
-                                    "type": "boolean",
-                                    "default": true
-                                }
-                            }
-                        },
-                        "fullnameOverride": {
-                            "type": "string",
-                            "x-onyxia": {
-                                "hidden": false,
-                                "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-mongodb"
-                            }
-                        },
-                        "image": {
-                            "type": "object",
-                            "description": "image specific configuration",
-                            "properties": {
-                                "tag": {
-                                    "type": "string",
-                                    "description": "mongodb version",
-                                    "default": "6.0.9-debian-11-r5"
-                                }
-                            }
-                        },
-                        "persistence": {
-                            "type": "object",
-                            "description": "configuration for persistence",
-                            "properties": {
-                                "resourcePolicy": {
-                                    "description": "Set this to 'keep' to disable data pvc deletion when uninstalling the chart. Subsequent installs will use the same pvc, restoring the state of the server. Note: if the runtime_args.settings.develop_mode is set to True, the server state will be reset (default datasets and budgets).",
-                                    "enum": [
-                                        "",
-                                        "keep"
-                                    ],
-                                    "type": "string",
-                                    "default": ""
-                                }
-                            },
-                            "enabled": {
-                                "type": "boolean",
-                                "description": "Create a persistent volume",
-                                "default": true
-                            },
-                            "size": {
-                                "type": "string",
-                                "title": "Persistent volume size",
-                                "description": "Size of the persistent volume",
-                                "default": "10Gi",
-                                "render": "slider",
-                                "sliderMin": 1,
-                                "sliderMax": 100,
-                                "sliderStep": 1,
-                                "sliderUnit": "Gi",
-                                "abc": {
-                                    "value": false,
-                                    "path": "mongodb/persistence/enabled"
-                                }
-                            }
-                        },
-                        "replicaCount": {
-                            "type": "integer",
-                            "default": 1,
-                            "abc": false
-                        },
-                        "resources": {
-                            "type": "object",
-                            "default": {},
-                            "abc": false
-                        },
-                        "security": {
-                            "description": "security specific configuration",
-                            "type": "object",
-                            "properties": {
-                                "networkPolicy": {
-                                    "type": "object",
-                                    "description": "Define access policy to the service",
-                                    "properties": {
-                                        "enabled": {
-                                            "type": "boolean",
-                                            "title": "Enable network policy",
-                                            "description": "Only pod from the same namespace will be allowed",
-                                            "default": true,
-                                            "x-onyxia": {
-                                                "overwriteDefaultWith": "region.defaultNetworkPolicy"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "server": {
                     "title": "Server Configuration",
                     "type": "object",
@@ -467,19 +345,21 @@
                                 },
                                 "repository": {
                                     "type": "string",
-                                    "default": "dsccadminch/lomas_server",
+                                    "default": "dsccadminch/lomas-raw",
                                     "enum": [
-                                        "dsccadminch/lomas_server"
+                                        "dsccadminch/lomas_server",
+                                        "dsccadminch/lomas-raw"
                                     ]
                                 },
                                 "tag": {
                                     "type": "string",
-                                    "default": "0.4.0",
+                                    "default": "0.5.1",
                                     "enum": [
                                         "latest",
                                         "0.3.1",
                                         "0.3.5",
-                                        "0.4.0"
+                                        "0.4.0",
+                                        "0.5.1"
                                     ]
                                 }
                             }
@@ -622,134 +502,179 @@
                         "runtime_args": {
                             "type": "object",
                             "properties": {
-                                "settings": {
+                                "bootstrap": {
                                     "type": "object",
+                                    "description":"Bootstrap",
                                     "properties": {
-                                        "develop_mode": {
-                                            "description": "When True, service database is reset to default user and dataset collections.",
-                                            "type": "boolean",
-                                            "default": true
+                                        "existingSecret": {
+                                            "type": "string",
+                                            "description": "existing Secret",
+                                            "default": ""
                                         },
+                                        "existingKey": {
+                                            "type": "string",
+                                            "description": "existing Key",
+                                            "default": ""
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "description": "value",
+                                            "default": "deadbeef"
+                                        }
+                                    }
+
+                                },
+                                "server": {
+                                    "type": "object",
+                                    "description": "server configuration",
+                                    "properties": {
                                         "submit_limit": {
                                             "description": "Currently unused, maximum query rate",
                                             "type": "integer",
                                             "default": 300,
                                             "abc": false
                                         },
-                                        "server": {
+                                        "time_attack": {
                                             "type": "object",
-                                            "description": "server configuration",
+                                            "description": "methods to avoid time side channel attack",
                                             "properties": {
-                                                "time_attack": {
-                                                    "type": "object",
-                                                    "description": "methods to avoid time side channel attack",
-                                                    "properties": {
-                                                        "magnitude": {
-                                                            "type": "integer",
-                                                            "description": "Noise magnitude",
-                                                            "default": 1
-                                                        },
-                                                        "method": {
-                                                            "enum": [
-                                                                "jitter",
-                                                                "stall"
-                                                            ],
-                                                            "type": "string",
-                                                            "description": "method for noise addition",
-                                                            "default": "jitter"
-                                                        }
-                                                    }
+                                                "magnitude": {
+                                                    "type": "integer",
+                                                    "description": "Noise magnitude",
+                                                    "default": 1
                                                 },
-                                                "host_ip": {
-                                                    "type": "string",
-                                                    "description": "ip host of server",
-                                                    "default": "0.0.0.0"
-                                                },
-                                                "host_port": {
-                                                    "type": "string",
-                                                    "description": "port of server",
-                                                    "default": "80"
-                                                },
-                                                "log_level": {
+                                                "method": {
                                                     "enum": [
-                                                        "notset",
-                                                        "debug",
-                                                        "info",
-                                                        "warning",
-                                                        "error",
-                                                        "critical"
+                                                        "jitter",
+                                                        "stall"
                                                     ],
                                                     "type": "string",
-                                                    "description": "level of verbosity",
-                                                    "default": "info"
-                                                },
-                                                "reload": {
-                                                    "type": "boolean",
-                                                    "description": "automatic reload of server",
-                                                    "default": false
-                                                },
-                                                "workers": {
-                                                    "type": "integer",
-                                                    "description": "number of workers",
-                                                    "default": 1,
-                                                    "abc": false
+                                                    "description": "method for noise addition",
+                                                    "default": "jitter"
                                                 }
                                             }
                                         },
-                                        "dp_libraries": {
-                                            "description": "Settings for DP libraries",
-                                            "type": "object",
-                                            "properties": {
-                                                "opendp": {
-                                                    "description": "Settings for opendp library",
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "contrib": {
-                                                            "description": "Enable contrib feature",
-                                                            "type": "boolean",
-                                                            "default": true
-                                                        },
-                                                        "floating_point": {
-                                                            "description": "Enable floating-point feature",
-                                                            "type": "boolean",
-                                                            "default": true
-                                                        },
-                                                        "honest_but_curious": {
-                                                            "description": "Enable honest-but-curious feature",
-                                                            "type": "boolean",
-                                                            "default": true
-                                                        }
-                                                    }
-                                                }
+                                        "host_port": {
+                                            "type": "string",
+                                            "description": "port of server",
+                                            "default": "48080"
+                                        },
+                                        "log_level": {
+                                            "enum": [
+                                                "DEBUG",
+                                                "INFO"
+                                            ],
+                                            "type": "string",
+                                            "description": "level of verbosity",
+                                            "default": "INFO"
+                                        },
+                                        "root_path": {
+                                            "type": "string",
+                                            "description": "root path",
+                                            "default": "/"
+                                        },
+                                        "lomas_log_level": {
+                                            "enum": [
+                                                "DEBUG",
+                                                "INFO"
+                                            ],
+                                            "type": "string",
+                                            "description": "level of verbosity for lomas",
+                                            "default": "DEBUG"
+                                        }
+                                    }
+                                },
+                                "authenticator": {
+                                    "type": "object",
+                                    "description":"Authenticator",
+                                    "properties": {
+                                        "oidc_discovery_url": {
+                                            "type": "string",
+                                            "title":"oidc_discovery_url",
+                                            "x-onyxia": {
+                                                "hidden": false,
+                                                "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}/.well_known/openid-configuration"
                                             }
                                         },
-                                        "private_db_credentials": {
-                                            "description": "List of credentials to access private dataset",
-                                            "type": "array",
-                                            "default": [],
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "db_type": {
-                                                        "type": "string",
-                                                        "description": "Type of the private database",
-                                                        "enum": ["S3_DB"]
-                                                    },
-                                                    "access_key_id": {
-                                                        "type": "string",
-                                                        "description": "Access key ID for the private database"
-                                                    },
-                                                    "secret_access_key": {
-                                                        "type": "string",
-                                                        "description": "Secret access key for the private database"
-                                                    },
-                                                    "credentials_name": {
-                                                        "type": "string",
-                                                        "description": "Unique name for the database credentials"
-                                                    }
-                                                }
+                                        "query_userinfo": {
+                                            "type": "boolean",
+                                            "default": true
+                                        },
+                                        "authentication_type": {
+                                            "type": "string",
+                                            "description": "Authentication Type",
+                                            "default": "oidc"
+                                        }
+                                    }
+
+                                },
+                                "opendp_features": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "enum": [
+                                        "contrib",
+                                        "idealized-numerics",
+                                        "honest-but-curious"
+                                        ]
+                                    },
+                                    "minItems": 1,
+                                    "maxItems": 3,
+                                    "uniqueItems": true,
+                                    "default": [
+                                        "contrib",
+                                        "idealized-numerics",
+                                        "honest-but-curious"
+                                    ]
+                                },
+                                "clean_admin_database": {
+                                    "type":"boolean",
+                                    "default":false
+                                },
+                                "private_db_credentials": {
+                                    "description": "List of credentials to access private dataset",
+                                    "type": "array",
+                                    "default": [],
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "db_type": {
+                                                "type": "string",
+                                                "description": "Type of the private database",
+                                                "enum": ["S3_DB"]
+                                            },
+                                            "access_key_id": {
+                                                "type": "string",
+                                                "description": "Access key ID for the private database"
+                                            },
+                                            "secret_access_key": {
+                                                "type": "string",
+                                                "description": "Secret access key for the private database"
+                                            },
+                                            "credentials_name": {
+                                                "type": "string",
+                                                "description": "Unique name for the database credentials"
                                             }
                                         }
+                                    }
+                                },
+                                "telemetry":{
+                                    "type":"object",
+                                    "description": "Telemetry parameters",
+                                    "properties": {
+                                        "enabled": {
+                                            "type":"boolean",
+                                            "default": true
+                                        },
+                                        "service_name":{
+                                            "type":"string",
+                                            "default":"lomas_server_app"
+                                        },
+                                        "service_id":{
+                                            "type":"string",
+                                            "default":"default-host"
+                                        }
+
                                     }
                                 }
                             }
@@ -807,6 +732,78 @@
                                 },
                                 "name": {
                                     "type": "string"
+                                }
+                            }
+                        },
+                        "pvc": {
+                            "type":"object",
+                            "properties": {
+                                "data": {
+                                    "type":"object",
+                                    "properties": {
+                                        "storageClassName": {
+                                            "type":"string",
+                                            "default": "rook-ceph-block"
+                                        },
+                                        "accessMode": {
+                                            "type":"string",
+                                            "default":"ReadWriteOnce"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "demoSetupJob": {
+                    "title": "Demo Setup Job",
+                    "type":"object",
+                    "properties": {
+                        "image": {
+                            "description": "Docker Image",
+                            "type": "object",
+                            "properties": {
+                                "pullPolicy": {
+                                    "type": "string",
+                                    "description": "option when pulling the docker image",
+                                    "default": "Always",
+                                    "enum": [
+                                        "IfNotPresent",
+                                        "Always",
+                                        "Never"
+                                    ]
+                                },
+                                "repository": {
+                                    "type": "string",
+                                    "default": "dsccadminch/lomas-raw",
+                                    "enum": [
+                                        "dsccadminch/lomas-raw"
+                                    ]
+                                },
+                                "tag": {
+                                    "type": "string",
+                                    "default": "0.5.1",
+                                    "enum": [
+                                        "latest",
+                                        "0.5.1"
+                                    ]
+                                }
+                            }
+                        },
+                        "imagePullSecrets": {
+                            "type": "array",
+                            "default": [],
+                            "abc": false
+                        },
+                        "config":{
+                            "type":"object",
+                            "properties": {
+                                "serverUrl":{
+                                    "type":"string",
+                                    "x-onyxia": {
+                                        "hidden": false,
+                                        "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-server-{{k8s.domain}}"
+                                    }
                                 }
                             }
                         }
@@ -1446,6 +1443,101 @@
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "dex": {
+                    "type":"object",
+                    "title": "Dex Configuration",
+                    "properties": {
+                        "create": {
+                            "type":"boolean",
+                            "default": true
+                        },
+                        "ingress": {
+                            "type": "object",
+                            "properties": {
+                    
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "abc": false
+                                },
+                                "hosts": {
+                                    "type":"array",
+                                    "items": {
+                                        "type":"object",
+                                        "properties": {
+                                            "host":{
+                                                "type":"string",
+                                                "x-onyxia": {
+                                                    "hidden": false,
+                                                    "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}"
+                                                }
+                                            },
+                                            "paths":{
+                                                "type":"array",
+                                                "items": {
+                                                    "type":"object",
+                                                    "properties": {
+                                                        "path": {
+                                                            "type":"string",
+                                                            "default":"/"
+                                                        },
+                                                        "pathType": {
+                                                            "type":"string",
+                                                            "default": "Prefix"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "config": {
+                            "type":"object",
+                            "properties": {
+                                "issuer": {
+                                    "type":"string",
+                                    "x-onyxia": {
+                                        "hidden": true,
+                                        "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}"
+                                    }
+                                },
+                                "staticClients": {
+                                    "type":"array",
+                                    "items": {
+                                        "type":"object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "default": "lomas_admin_dashboard"
+                                            },
+                                            "name": {
+                                                "type":"string",
+                                                "default": "lomas_dashboard"
+                                            },
+                                            "public" : {
+                                                "type":"boolean",
+                                                "default": false
+                                            },
+                                            "redirectURIs": {
+                                                "type":"array",
+                                                "items": {
+                                                    "type":"string",
+                                                    "default":"https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"
+                                                }
+                                            },
+                                            "secret": {
+                                                "type":"string",
+                                                "default": "lomas_dashboard"
+                                            }
+                                        }
                                     }
                                 }
                             }
