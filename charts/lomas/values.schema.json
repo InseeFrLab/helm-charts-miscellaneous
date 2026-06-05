@@ -7,6 +7,7 @@
             "properties": {
                 "fullnameOverride": {
                     "type": "string",
+                    "default":"",
                     "x-onyxia": {
                         "hidden": false,
                         "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas"
@@ -37,6 +38,7 @@
                             "properties": {
                                 "serverUrl":{
                                     "type":"string",
+                                    "default":"",
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-server-{{k8s.domain}}"
@@ -111,6 +113,7 @@
                                 "hostname": {
                                     "type": "string",
                                     "title":"Hostname",
+                                    "default":"",
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}"
@@ -130,6 +133,7 @@
                                                 "redirectUri": {
                                                     "type":"string",
                                                     "title": "RedirectURI",
+                                                    "default":"",
                                                     "x-onyxia": {
                                                         "hidden": false,
                                                         "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"
@@ -139,6 +143,7 @@
                                                 "serverMetadataUrl": {
                                                     "type":"string",
                                                     "title":"Server Metadata URL",
+                                                    "default":"",
                                                     "x-onyxia": {
                                                         "hidden": false,
                                                         "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}/.well_known/openid-configuration"
@@ -397,6 +402,7 @@
                                 "hostname": {
                                     "type": "string",
                                     "title":"Hostname",
+                                    "default":"",
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-server-{{k8s.domain}}"
@@ -593,6 +599,7 @@
                                         "oidc_discovery_url": {
                                             "type": "string",
                                             "title":"oidc_discovery_url",
+                                            "default":"",
                                             "x-onyxia": {
                                                 "hidden": false,
                                                 "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}/.well_known/openid-configuration"
@@ -804,6 +811,7 @@
                             "properties": {
                                 "serverUrl":{
                                     "type":"string",
+                                    "default":"",
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-server-{{k8s.domain}}"
@@ -839,6 +847,7 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
+                            "default":"",
                             "x-onyxia": {
                                 "hidden": false,
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-loki"
@@ -1008,6 +1017,7 @@
                         "fullnameOverride": {
                             "type": "string",
                             "description": "Override the full name for Prometheus deployment.",
+                            "default":"",
                             "x-onyxia": {
                                 "hidden": false,
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-prometheus"
@@ -1056,6 +1066,7 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
+                            "default":"",
                             "x-onyxia": {
                                 "hidden": false,
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-otel"
@@ -1139,6 +1150,7 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
+                            "default":"",
                             "x-onyxia": {
                                 "hidden": false,
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-tempo"
@@ -1237,6 +1249,7 @@
                         },
                         "fullnameOverride": {
                             "type": "string",
+                            "default":"",
                             "x-onyxia": {
                                 "hidden": false,
                                 "overwriteDefaultWith":"{{project.id}}-{{k8s.randomSubdomain}}-lomas-grafana-dashboard"
@@ -1444,6 +1457,7 @@
                                 },
                                 "hostname": {
                                     "type": "string",
+                                    "default":"",
                                     "x-onyxia": {
                                         "hidden": false,
                                         "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-monitoring-dashboard-{{k8s.domain}}"
@@ -1472,11 +1486,13 @@
                                 },
                                 "hosts": {
                                     "type":"array",
+                                    "minItems": 1,
                                     "items": {
                                         "type":"object",
                                         "properties": {
                                             "host":{
                                                 "type":"string",
+                                                "default":"",
                                                 "x-onyxia": {
                                                     "hidden": false,
                                                     "overwriteDefaultWith": "{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}"
@@ -1508,6 +1524,7 @@
                             "properties": {
                                 "issuer": {
                                     "type":"string",
+                                    "default":"",
                                     "x-onyxia": {
                                         "hidden": true,
                                         "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-dex-{{k8s.domain}}"
@@ -1534,7 +1551,11 @@
                                                 "type":"array",
                                                 "items": {
                                                     "type":"string",
-                                                    "default":"https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"
+                                                    "default":"",
+                                                    "x-onyxia": {
+                                                        "hidden": false,
+                                                        "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"
+                                                    }
                                                 }
                                             },
                                             "secret": {
