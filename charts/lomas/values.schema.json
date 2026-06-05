@@ -1500,19 +1500,12 @@
                                             },
                                             "paths":{
                                                 "type":"array",
-                                                "items": {
-                                                    "type":"object",
-                                                    "properties": {
-                                                        "path": {
-                                                            "type":"string",
-                                                            "default":"/"
-                                                        },
-                                                        "pathType": {
-                                                            "type":"string",
-                                                            "default": "Prefix"
-                                                        }
+                                                "default": [
+                                                    {
+                                                        "path": "/",
+                                                        "pathType": "Prefix"
                                                     }
-                                                }
+                                                ]
                                             }
                                         }
                                     }
@@ -1531,37 +1524,32 @@
                                     }
                                 },
                                 "staticClients": {
-                                    "type":"array",
-                                    "items": {
-                                        "type":"object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "default": "lomas_admin_dashboard"
+                                    "type": "array",
+                                    "x-onyxia": {
+                                        "overwriteDefaultWith": [
+                                            {
+                                                "id": "lomas_dashboard",
+                                                "name": "lomas_dashboard",
+                                                "public": false,
+                                                "secret": "lomas_dashboard",
+                                                "redirectURIs": ["https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"]
                                             },
-                                            "name": {
-                                                "type":"string",
-                                                "default": "lomas_dashboard"
-                                            },
-                                            "public" : {
-                                                "type":"boolean",
-                                                "default": false
-                                            },
-                                            "redirectURIs": {
-                                                "type":"array",
-                                                "items": {
-                                                    "type":"string",
-                                                    "default":"",
-                                                    "x-onyxia": {
-                                                        "hidden": false,
-                                                        "overwriteDefaultWith": "https://{{project.id}}-{{k8s.randomSubdomain}}-lomas-admin-dashboard-{{k8s.domain}}/oauth2callback"
-                                                    }
-                                                }
-                                            },
-                                            "secret": {
-                                                "type":"string",
-                                                "default": "lomas_dashboard"
+                                            {
+                                                "id": "lomas_client",
+                                                "name": "lomas_client",
+                                                "public": true,
+                                                "redirectURIs": ["/device/callback"]
                                             }
+                                        ]
+                                    },
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": { "type": "string", "default": "lomas_dashboard" },
+                                            "name": { "type": "string", "default": "lomas_dashboard" },
+                                            "public": { "type": "boolean", "default": false },
+                                            "secret": { "type": "string", "default": "" },
+                                            "redirectURIs": { "type": "array", "default": [] }
                                         }
                                     }
                                 }
