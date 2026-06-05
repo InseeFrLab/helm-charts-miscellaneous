@@ -241,6 +241,26 @@ entries:
   lomas-server:
   - apiVersion: v2
     appVersion: 0.5.1
+    created: "2026-06-05T11:20:52.260471574Z"
+    dependencies:
+    - name: lomas-server
+      repository: https://dscc-admin-ch.github.io/helm-charts
+      version: 0.5.1
+    description: Lomas is a remote access platform developed by the Swiss Federal
+      Statistical Office allowing National Statistical Offices to offer eyes-off data
+      science on private datasets while controlling disclosure risk. The platform
+      relies on a service that is meant to be deployed on-premises and allows accredited
+      users to apply differentially private algorithms on private datasets using a
+      dedicated client Python library.
+    digest: 64b7ef8aa9ba6fa03be012d34170e7c5b746c55fc02795288433a52a4599887a
+    icon: https://raw.githubusercontent.com/dscc-admin-ch/lomas/develop/images/lomas_logo.svg
+    name: lomas-server
+    type: application
+    urls:
+    - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/lomas-server-0.5.3/lomas-server-0.5.3.tgz
+    version: 0.5.3
+  - apiVersion: v2
+    appVersion: 0.5.1
     created: "2026-06-05T10:32:16.029245223Z"
     dependencies:
     - name: lomas-server
@@ -1922,4 +1942,4 @@ entries:
     urls:
     - https://github.com/InseeFrLab/helm-charts-miscellaneous/releases/download/vllm-0.0.2/vllm-0.0.2.tgz
     version: 0.0.2
-generated: "2026-06-05T10:32:16.029690928Z"
+generated: "2026-06-05T11:20:52.26096654Z"
