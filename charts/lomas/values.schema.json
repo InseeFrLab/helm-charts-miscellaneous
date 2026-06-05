@@ -307,14 +307,16 @@
                             "abc": false,
                             "properties": {
                                 "annotations": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "default":{}
                                 },
                                 "create": {
                                     "type": "boolean",
                                     "default": false
                                 },
                                 "name": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "default":""
                                 }
                             }
                         }
