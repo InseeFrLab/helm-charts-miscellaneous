@@ -1558,6 +1558,46 @@
                             }
                         }
                     }
+                },
+                "rabbitmq": {
+                    "type":"object",
+                    "title": "RabbitMQ Configuration",
+                    "properties": {
+                        "create": {
+                            "type":"boolean",
+                            "default": true
+                        },
+                        "heartbeat_client": {
+                            "type":"integer",
+                            "default":1800
+                        },
+                        "plugins": {
+                            "type":"string",
+                            "default": "rabbitmq_management rabbitmq_peer_discovery_k8s"
+                        },
+                        "metrics": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type":"boolean",
+                                    "default":true
+                                },
+                                "plugins":{
+                                    "type":"string",
+                                    "default":"rabbitmq_prometheus"
+                                },
+                                "podAnnotations":{
+                                    "type":"object",
+                                    "properties": {
+                                        "prometheus.io/scrape": {
+                                            "type": "string",
+                                            "default":"true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
