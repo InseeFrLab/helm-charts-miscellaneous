@@ -64,6 +64,8 @@ spec:
           securityContext:
             {{- toYaml .Values.containerSecurityContext | nindent 12 }}
           env:
+          - name: CUBEJS_DATASOURCES
+            value: default,pfd
           - name: CUBEJS_DB_TYPE
             value: duckdb
           - name: CUBEJS_DB_DUCKDB_S3_ACCESS_KEY_ID
@@ -81,6 +83,24 @@ spec:
             value: path
             {{- end }}
           - name: CUBEJS_DB_DUCKDB_EXTENSIONS
+            value: httpfs
+          - name: CUBEJS_DS_PFD_DB_TYPE
+            value: duckdb
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_S3_ACCESS_KEY_ID
+            value: {{ .Values.s3.pfd.accessKeyId }}
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_S3_SECRET_ACCESS_KEY
+            value: {{ .Values.s3.pfd.secretAccessKey }}
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_S3_ENDPOINT
+            value: {{ .Values.s3.pfd.endpoint }}
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_S3_REGION
+            value: {{ .Values.s3.pfd.defaultRegion }}
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_S3_SESSION_TOKEN
+            value: {{ .Values.s3.pfd.sessionToken }}
+            {{- if .Values.s3.pathStyleAccess }}
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_S3_URL_STYLE
+            value: path
+            {{- end }}
+          - name: CUBEJS_DS_PFD_DB_DUCKDB_EXTENSIONS
             value: httpfs
           - name: CUBEJS_CONCURRENCY
             value: "30"
