@@ -49,3 +49,11 @@ Selector labels
 app.kubernetes.io/name: {{ include "cubejs.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Define clusterIssuer based on .Values.ingress.hostname value
+*/}}
+{{- define "certmanager.clusterIssuer" -}}
+# TODO : mettre une fonction ici pour avoir un truc à surcharger
+{{- end -}}
+
