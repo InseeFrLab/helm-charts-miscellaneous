@@ -7,16 +7,15 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "cubejs.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  annotations: 
+    cert-manager.io/cluster-issuer: "developpement-insee-fr"  
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName | quote }}
 {{- if .Values.ingress.tls }}
   tls:
     - hosts:
         - {{ .Values.ingress.hostname | quote }}
+      secretName: {{ $fullName }}-cert    
 {{- end }}
   rules:
     - host: {{ .Values.ingress.hostname | quote }}
