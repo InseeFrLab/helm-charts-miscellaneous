@@ -46,8 +46,8 @@ spec:
               mkdir -p /cube/conf/model && wget -O /cube/conf/model/model.yml {{ .Values.modelUrl }} || true
           volumeMounts:
             - name: model
-              mountPath: /cube/conf/model
-              subPath: model
+              mountPath: /cube/conf/model/age2029.yaml
+              subPath: age2029.yaml
       {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -126,7 +126,8 @@ spec:
           {{- end }}
           volumeMounts:
             - name: model
-              mountPath: /cube/conf/model
+              mountPath: /cube/conf/model/age2029.yaml
+              subPath: age2029.yaml
       {{- if .Values.modelCM }}
       volumes: 
       - name: model
