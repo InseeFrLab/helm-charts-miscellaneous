@@ -48,7 +48,7 @@ spec:
             - name: model
               mountPath: /cube/conf/model/age2029.yaml
               subPath: age2029.yaml
-            - name: model2
+            - name: model
               mountPath: /cube/conf/model/rp_cube_anai.yaml
               subPath: rp_cube_anai.yaml
       {{- end }}
@@ -131,15 +131,12 @@ spec:
             - name: model
               mountPath: /cube/conf/model/age2029.yaml
               subPath: age2029.yaml
-            - name: model2
+            - name: model
               mountPath: /cube/conf/model/rp_cube_anai.yaml
               subPath: rp_cube_anai.yaml
       {{- if .Values.modelCM }}
       volumes: 
       - name: model
-        configMap: 
-          name: {{ include "cubejs.fullname" . }}
-      - name: model2
         configMap: 
           name: {{ include "cubejs.fullname" . }}
     {{- end }}
