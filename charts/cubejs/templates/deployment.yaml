@@ -21,11 +21,17 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.modelCM }}
+      volumes: 
+      - name: model
+        configMap: 
+          name: {{ include "cubejs.fullname" . }}
+      {{- end }}
+      {{- if .Values.modelUrl }}
       volumes:
         - name: model
           persistentVolumeClaim:
             claimName:  {{ include "cubejs.fullname" . }}
-      {{- if .Values.modelUrl }}
       initContainers:
         - name: fetch-model
           image: inseefrlab/onyxia-base:latest
@@ -130,9 +136,3 @@ spec:
             - name: model
               mountPath: /cube/conf/model/rp_cube_anai.yaml
               subPath: rp_cube_anai.yaml
-      {{- if .Values.modelCM }}
-      volumes: 
-      - name: model
-        configMap: 
-          name: {{ include "cubejs.fullname" . }}
-    {{- end }}
