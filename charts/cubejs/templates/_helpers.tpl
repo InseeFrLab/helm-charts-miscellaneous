@@ -49,3 +49,11 @@ Selector labels
 app.kubernetes.io/name: {{ include "cubejs.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Needs to be overwritten: add necessary annotation for cert-manager 
+*/}}
+{{- define "certmanager.clusterIssuer" -}}
+cert-manager.io/cluster-issuer: ""
+{{- end -}}
+

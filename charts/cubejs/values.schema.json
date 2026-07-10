@@ -14,11 +14,7 @@
               "title": "Pull image from registry",
               "type": "string",
               "default": "IfNotPresent",
-              "enum": [
-                "IfNotPresent",
-                "Always",
-                "Never"
-              ]
+              "enum": ["IfNotPresent", "Always", "Never"]
             },
             "version": {
               "title": "Name of the service's Docker image",
@@ -39,7 +35,7 @@
           "type": "string",
           "default": "admin",
           "x-onyxia": {
-          "overwriteDefaultWith": "{{project.id}}"
+            "overwriteDefaultWith": "{{project.id}}"
           }
         },
         "password": {
@@ -56,7 +52,7 @@
     "model": {
       "title": "Model",
       "type": "string",
-      "default":  "",
+      "default": "",
       "description": "Link (raw url) to the yaml file containing the model"
     },
     "extraEnvVars": {
@@ -84,29 +80,29 @@
       "type": "object",
       "properties": {
         "accessKeyId": {
-        "title": "Access Key ID",
-        "type": "string",
-        "default": "",
-        "x-onyxia": {
+          "title": "Access Key ID",
+          "type": "string",
+          "default": "",
+          "x-onyxia": {
             "overwriteDefaultWith": "s3.AWS_ACCESS_KEY_ID"
-        },
-        "hidden": {
+          },
+          "hidden": {
             "value": false,
             "path": "enabled",
             "isPathRelative": true
-        }
+          }
         },
         "endpoint": {
           "title": "S3 endpoint URL",
           "type": "string",
           "default": "",
           "x-onyxia": {
-              "overwriteDefaultWith": "{{s3.AWS_S3_ENDPOINT}}"
+            "overwriteDefaultWith": "{{s3.AWS_S3_ENDPOINT}}"
           },
           "hidden": {
-              "value": false,
-              "path": "enabled",
-              "isPathRelative": true
+            "value": false,
+            "path": "enabled",
+            "isPathRelative": true
           }
         },
         "defaultRegion": {
@@ -114,12 +110,12 @@
           "type": "string",
           "default": "",
           "x-onyxia": {
-              "overwriteDefaultWith": "{{s3.AWS_DEFAULT_REGION}}"
+            "overwriteDefaultWith": "{{s3.AWS_DEFAULT_REGION}}"
           },
           "hidden": {
-              "value": false,
-              "path": "enabled",
-              "isPathRelative": true
+            "value": false,
+            "path": "enabled",
+            "isPathRelative": true
           }
         },
         "secretAccessKey": {
@@ -128,36 +124,36 @@
           "render": "password",
           "default": "",
           "x-onyxia": {
-              "overwriteDefaultWith": "{{s3.AWS_SECRET_ACCESS_KEY}}"
+            "overwriteDefaultWith": "{{s3.AWS_SECRET_ACCESS_KEY}}"
           },
           "hidden": {
-              "value": false,
-              "path": "enabled",
-              "isPathRelative": true
-          }
-        },
-        "sessionToken": {
-        "title": "Session token",
-        "type": "string",
-        "render": "password",
-        "default": "",
-        "x-onyxia": {
-            "overwriteDefaultWith": "{{s3.AWS_SESSION_TOKEN}}"
-        },
-        "hidden": {
             "value": false,
             "path": "enabled",
             "isPathRelative": true
-        }
+          }
+        },
+        "sessionToken": {
+          "title": "Session token",
+          "type": "string",
+          "render": "password",
+          "default": "",
+          "x-onyxia": {
+            "overwriteDefaultWith": "{{s3.AWS_SESSION_TOKEN}}"
+          },
+          "hidden": {
+            "value": false,
+            "path": "enabled",
+            "isPathRelative": true
+          }
         },
         "pathStyleAccess": {
-        "title": "Path-style access",
-        "type": "boolean",
-        "default": false,
-        "x-onyxia": {
+          "title": "Path-style access",
+          "type": "boolean",
+          "default": false,
+          "x-onyxia": {
             "overwriteDefaultWith": "{{s3.pathStyleAccess}}"
-        },
-        "hidden": {
+          },
+          "hidden": {
             "value": false,
             "path": "enabled",
             "isPathRelative": true
@@ -196,6 +192,13 @@
           "x-onyxia": {
             "hidden": true,
             "overwriteDefaultWith": "{{k8s.ingressClassName}}"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }

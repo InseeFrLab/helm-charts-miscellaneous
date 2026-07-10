@@ -1,0 +1,12 @@
+{{- if .Values.modelCM }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cubejs.fullname" . }}
+  labels:
+    {{- include "cubejs.labels" . | nindent 4 }}
+{{- with .Values.modelCM }}
+data:
+   {{- toYaml . | nindent 4 }}
+{{- end }}
+{{- end }}   

@@ -42,6 +42,11 @@ containerSecurityContext: {}
 #    drop:
 #      - ALL
 
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
   image:
@@ -64,11 +69,13 @@ sqlApi:
 ingress:
   enabled: false
   tls: true
-  ingressClassName: ''
-  annotations: []
+  ingressClassName: ""
+  annotations: {}
   hostname: chart-example.local
 
-model: ""
+modelUrl: ""
+
+modelCM: {}
 
 s3:
   accessKeyId: ""
