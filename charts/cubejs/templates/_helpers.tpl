@@ -51,9 +51,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Define clusterIssuer based on .Values.ingress.hostname value
+Needs to be overwritten: add necessary annotation for cert-manager 
 */}}
 {{- define "certmanager.clusterIssuer" -}}
-# TODO : mettre une fonction ici pour avoir un truc à surcharger
+cert-manager.io/cluster-issuer: ""
 {{- end -}}
 
